@@ -1,0 +1,33 @@
+{
+    "name": "thepublicgood/vitamin",
+    "description": "A solution for using Vite with Laravel and Inertia",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TPG\\Vitamin\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "THEPUBLICGOOD",
+            "email": "makers@thepublicgood.dev"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8.50",
+        "symfony/process": "^5.3"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^v6.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TPG\\Vitamin\\ServiceProvider"
+            ]
+        }
+    }
+}
