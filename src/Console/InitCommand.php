@@ -5,8 +5,11 @@ namespace TPG\Vitamin\Console;
 use Illuminate\Console\Command;
 use TPG\Vitamin\Installers\ComposerDependencyInstaller;
 use TPG\Vitamin\Installers\ConfigInstaller;
+use TPG\Vitamin\Installers\InertiaInstaller;
+use TPG\Vitamin\Installers\JavaScriptInstaller;
 use TPG\Vitamin\Installers\NodeDependencyInstaller;
 use TPG\Vitamin\Installers\NodeScriptInstaller;
+use TPG\Vitamin\Installers\TailwindInstaller;
 
 class InitCommand extends Command
 {
@@ -18,7 +21,10 @@ class InitCommand extends Command
         ConfigInstaller::class,
         NodeDependencyInstaller::class,
         NodeScriptInstaller::class,
+        JavaScriptInstaller::class,
+        TailwindInstaller::class,
         ComposerDependencyInstaller::class,
+        InertiaInstaller::class,
     ];
 
     public function handle(): int
@@ -55,7 +61,7 @@ class InitCommand extends Command
                 'postcss',
                 'tailwindcss',
                 'vite',
-                'vue',
+                'vue@next',
             ],
             'scripts' => [
                 'dev' => 'vite serve --host='.$host,
@@ -95,6 +101,6 @@ class InitCommand extends Command
 
     protected function getVuePath(): string
     {
-        return $this->ask('Where are your Vue components stored?', './resources/views');
+        return $this->ask('Where are your Vue components stored? (relative to root)', './resources/views');
     }
 }

@@ -10,7 +10,7 @@ class AppComposer
 {
     public function compose(View $view): void
     {
-        $view->with('vitamin', $this->getViteAssets());
+            $view->with('vitamin', $this->getViteAssets());
     }
 
     protected function getViteAssets(): HtmlString
