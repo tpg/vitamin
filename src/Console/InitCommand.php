@@ -101,6 +101,6 @@ class InitCommand extends Command
 
     protected function getVuePath(): string
     {
-        return $this->ask('Where are your Vue components stored? (relative to root)', './resources/views');
+        return $this->ask('Where are your Vue components stored? (relative to root)', './resources/views/Pages');
     }
 }
