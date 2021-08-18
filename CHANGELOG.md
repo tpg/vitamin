@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.7] 2021-08-18
+### Added
+- The `AppComposer` class now has a protected `$jsPath` property that points to the `app.js` location. This makes it easier to extend. 
+
 ## [0.0.6] 2021-08-18
 ### Fixed
 - Init command will now ask for a JS sources path.

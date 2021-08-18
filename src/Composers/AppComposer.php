@@ -8,6 +8,8 @@ use Illuminate\View\View;
 
 class AppComposer
 {
+    protected string $jsPath = 'resources/js/app.js';
+
     public function compose(View $view): void
     {
             $view->with('vitamin', $this->getViteAssets());
@@ -20,7 +22,7 @@ class AppComposer
         if ($this->devServerRunning()) {
             return new HtmlString(<<<HTML
                 <script type="module" src="$host:3000/@vite/client"></script>
-                <script type="module" src="$host:3000/resources/js/app.js"></script>
+                <script type="module" src="$host:3000/$this->jsPath"></script>
             HTML);
         }
 
@@ -29,8 +31,8 @@ class AppComposer
         ), true, 512, JSON_THROW_ON_ERROR);
 
         return new HtmlString(<<<HTML
-            <script type="module" src="/build/{$manifest['resources/js/app.js']['file']}"></script>
-            <script type="module" src="/build/{$manifest['resources/js/app.js']['css'][0]}"></script>
+            <script type="module" src="/build/{$manifest[$this->jsPath]['file']}"></script>
+            <script type="module" src="/build/{$manifest[$this->jsPath]['css'][0]}"></script>
         HTML);
     }
 
