@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.8]
+## [0.0.9] 2021-08-18
+### Fixed
+- Fixed a bug in the `LocalValetDriver` that was not loading static files correctly.
+
+## [0.0.8] 2021-08-18
 ### Changed
 - Node dependencies are now added as dev dependencies.
 - Updated the `README` to include a section on the view composer and how to extend it.

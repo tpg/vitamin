@@ -13,10 +13,12 @@ class LocalValetDriver extends LaravelValetDriver
 
     public function isStaticFile($sitePath, $siteName, $uri): bool|string
     {
+        $ret = parent::isStaticFile($sitePath, $siteName, $uri);
+
         if (file_exists($path = $sitePath.$uri)) {
             return $path;
-        };
+        }
 
-        return false;
+        return $ret;
     }
 }
