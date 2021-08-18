@@ -67,6 +67,51 @@ yarn prod
 
 As simple as that. Depending on the size of your project, building should be a fair amount quicker than Webpack. Once complete, there is a new `public/build` directory. You'll probably want to add that to your `.gitignore` file. It's not wize to include compiled assets in your repo.
 
+### The View Composer
+The heart of Vitamin is a simple Laravel view composer that ensures the correct resources are inserted into the page. The view composer is included with the package, but you can extend it if you want to make changes. For example, if you're using TypeScript, you'll probably want to change the `app.js` file for an `app.ts` file and you'll need to update the composer to point to the correct filename. To do this, create a new `AppComposer` class in your project and extend the `TPG\Vitamin\Composers\AppComposer` class. You can then override the `$jsPath` property:
+
+```php
+namespace App\Composers;
+
+use TPG\Vitamin\Composers\AppComposer as VitaminAppComposer;
+
+class AppComposer extends VitaminAppComposer
+{
+    protected string $jsPath = 'resources/js/app.ts';
+}
+```
+
+You'll need to make sure your app binds your new composer instead of the default one. You can do this in the `boot` method of your `AppServiceProvider`:
+
+```php
+namespace App\Providers;
+
+use App\Composers\AppComposer;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        View::composer('app', AppComposer::class);
+    }
+}
+```
+
+That's it. Now your app will use your new composer instead of the default Vitamin one. If you need to override the `compose` method, remember to call `parent::compose()`:
+
+```php
+public function compose(View $view): void
+{
+    // Anything you need to add to the composer should go here...
+    
+    parent::compose($view);
+}
+```
+
+If you're not familiar with Laravel view composers, take a look at the documentation [here](https://laravel.com/docs/views#view-composers).
+
 ### Valet
 During development, all assets are served from the dev server running at port 3000. Vitamin includes a custom Valet driver (there is a `LocalValetDriver.php` file in your project root) that will ensure that assets served from `node_modules` are served correctly. I found that this was needed in a few edge cases. The custom driver extends the default `LaravelValetDriver` so you shouldn't have any problems running Valet.
 

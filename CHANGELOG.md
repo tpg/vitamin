@@ -5,9 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased]
+## [0.0.8]
 ### Changed
 - Node dependencies are now added as dev dependencies.
+- Updated the `README` to include a section on the view composer and how to extend it.
 
 ## [0.0.7] 2021-08-18
 ### Added
