@@ -23,6 +23,10 @@ class JavaScriptInstaller implements InstallerContract
             'app.js',
         ];
 
+        $remove = [
+            'webpack.mix.js',
+        ];
+
         $settings['variables'] = [
             '$VUEPATH$' => Str::after(Arr::get($settings, 'variables.$VUEPATH$'), '/'),
         ];
@@ -37,6 +41,13 @@ class JavaScriptInstaller implements InstallerContract
 
             file_put_contents(base_path('resources/js/'.$file), $data);
             $this->output->write('.');
+        });
+
+        collect($remove)->each(function ($file) {
+            if (file_exists(base_path($file))) {
+                unlink(base_path($file));
+                $this->output->write('.');
+            }
         });
 
         $this->output->writeln('[<info>✔</info>]');
