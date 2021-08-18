@@ -28,6 +28,6 @@ class NodeDependencyInstaller implements InstallerContract
 
     protected function getProcessRunner(array $dependencies = []): Process
     {
-        return Process::fromShellCommandline('yarn add'.implode(' ', $dependencies). ' --dev');
+        return Process::fromShellCommandline('yarn add --dev '.implode(' ', $dependencies));
     }
 }

@@ -42,14 +42,16 @@ class InitCommand extends Command
     protected function install(): int
     {
         $host = $this->getHost();
-        $vue = $this->getVuePath();
         $js = $this->getJsPath();
+        $pages = $this->getPagesPath($js);
+        $components = $this->getComponentsPath($js);
 
         $settings = [
             'variables' => [
                 '$HOST$' => $host,
                 '$JSPATH$' => $js,
-                '$VUEPATH$' => $vue,
+                '$PAGESPATH$' => $pages,
+                '$COMPONENTSPATH$' => $components,
             ],
             'node' => [
                 '@heroicons/vue',
@@ -105,14 +107,21 @@ class InitCommand extends Command
     protected function getJsPath(): string
     {
         return $this->stripSlashes(
-            $this->ask('Where are your Vue sources stored? (relative to resources directory)', 'js')
+            $this->ask('Where are your JS sources stored? (relative to resources directory)', 'js')
         );
     }
 
-    protected function getVuePath(): string
+    protected function getPagesPath(string $jsPath): string
     {
         return $this->stripSlashes(
-            $this->ask('Where are your Vue pages stored? (relative to resources directory)', 'js/Pages')
+            $this->ask('Where are your Inertia Vue pages stored? (relative to resources directory)', $jsPath.'/Pages')
+        );
+    }
+
+    protected function getComponentsPath(string $jsPath): string
+    {
+        return $this->stripSlashes(
+            $this->ask('Where are your NON-Inertia Vue components stored? (relative to resources directory)', $jsPath.'/Components')
         );
     }
 

@@ -28,6 +28,9 @@
             "providers": [
                 "TPG\\Vitamin\\ServiceProvider"
             ]
+        },
+        "branch-aliases": {
+            "dev-master": "1.0.x-dev"
         }
     }
 }
