@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.6] 2021-08-18
+### Fixed
+- Init command will now ask for a JS sources path.
+- Fixed a path bug when specifying the JS path in `jsconfig.json` and `vite.config.js`.
+- Init command will now strip slashes from provided paths.
+
 ## [0.0.5] 2021-08-18
 ### Fixed
 - Fixed a bug in the `app.js` stub that was including the Vue path incorrectly.

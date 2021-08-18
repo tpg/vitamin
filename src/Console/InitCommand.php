@@ -3,6 +3,7 @@
 namespace TPG\Vitamin\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 use TPG\Vitamin\Installers\ComposerDependencyInstaller;
 use TPG\Vitamin\Installers\ConfigInstaller;
 use TPG\Vitamin\Installers\InertiaInstaller;
@@ -42,10 +43,12 @@ class InitCommand extends Command
     {
         $host = $this->getHost();
         $vue = $this->getVuePath();
+        $js = $this->getJsPath();
 
         $settings = [
             'variables' => [
                 '$HOST$' => $host,
+                '$JSPATH$' => $js,
                 '$VUEPATH$' => $vue,
             ],
             'node' => [
@@ -99,8 +102,30 @@ class InitCommand extends Command
         return $this->ask('What hostname are using to test with? (e.g.: valet.test): ');
     }
 
+    protected function getJsPath(): string
+    {
+        return $this->stripSlashes(
+            $this->ask('Where are your Vue sources stored? (relative to resources directory)', 'js')
+        );
+    }
+
     protected function getVuePath(): string
     {
-        return $this->ask('Where are your Vue components stored? (relative to root)', './resources/views/Pages');
+        return $this->stripSlashes(
+            $this->ask('Where are your Vue pages stored? (relative to resources directory)', 'js/Pages')
+        );
+    }
+
+    protected function stripSlashes(string $path): string
+    {
+        if (Str::startsWith($path, '/')) {
+            $path = Str::after($path, '/');
+        }
+
+        if (Str::endsWith($path, '/')) {
+            $path = Str::beforeLast($path, '/');
+        }
+
+        return $path;
     }
 }

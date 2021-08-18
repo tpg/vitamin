@@ -14,7 +14,7 @@ export default ({command}) => ({
     },
     resolve: {
         alias: {
-            '@': path.resolve(__dirname + '$VUEPATH$')
+            '@': path.resolve(__dirname + '/resources/$JSPATH$')
         }
     },
     plugins: [

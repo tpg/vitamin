@@ -27,10 +27,6 @@ class JavaScriptInstaller implements InstallerContract
             'webpack.mix.js',
         ];
 
-        $settings['variables'] = [
-            '$VUEPATH$' => Str::after(Arr::get($settings, 'variables.$VUEPATH$'), '/'),
-        ];
-
         $this->output->write('Installing JS files');
         collect($files)->each(function ($file) use ($settings) {
             $data = file_get_contents(__DIR__.'/../../stubs/'.$file);
