@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TPG\Vitamin\Installers;
 
 use Symfony\Component\Console\Input\InputInterface;

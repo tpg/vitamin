@@ -2,8 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@Pages/*": ["./resources/$PAGESPATH$/*"],
-            "@Components/*": ["./resources/$COMPONENTSPATH$/*"]
+            "@/*": ["./resources/$JSPATH$/*"]
         }
     }
 }

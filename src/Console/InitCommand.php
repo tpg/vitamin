@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TPG\Vitamin\Console;
 
 use Illuminate\Console\Command;
@@ -11,6 +13,7 @@ use TPG\Vitamin\Installers\JavaScriptInstaller;
 use TPG\Vitamin\Installers\NodeDependencyInstaller;
 use TPG\Vitamin\Installers\NodeScriptInstaller;
 use TPG\Vitamin\Installers\TailwindInstaller;
+use TPG\Vitamin\Installers\ViewComposerInstaller;
 
 class InitCommand extends Command
 {
@@ -26,6 +29,7 @@ class InitCommand extends Command
         TailwindInstaller::class,
         ComposerDependencyInstaller::class,
         InertiaInstaller::class,
+//        ViewComposerInstaller::class,
     ];
 
     public function handle(): int
@@ -41,17 +45,16 @@ class InitCommand extends Command
 
     protected function install(): int
     {
+
         $host = $this->getHost();
         $js = $this->getJsPath();
         $pages = $this->getPagesPath($js);
-        $components = $this->getComponentsPath($js);
 
         $settings = [
             'variables' => [
                 '$HOST$' => $host,
                 '$JSPATH$' => $js,
                 '$PAGESPATH$' => $pages,
-                '$COMPONENTSPATH$' => $components,
             ],
             'node' => [
                 '@heroicons/vue',
@@ -101,7 +104,7 @@ class InitCommand extends Command
 
     protected function getHost(): string
     {
-        return $this->ask('What hostname are using to test with? (e.g.: valet.test): ');
+        return $this->ask('What hostname are using in development? (e.g.: valet.test): ');
     }
 
     protected function getJsPath(): string
@@ -115,13 +118,6 @@ class InitCommand extends Command
     {
         return $this->stripSlashes(
             $this->ask('Where are your Inertia Vue pages stored? (relative to resources directory)', $jsPath.'/Pages')
-        );
-    }
-
-    protected function getComponentsPath(string $jsPath): string
-    {
-        return $this->stripSlashes(
-            $this->ask('Where are your NON-Inertia Vue components stored? (relative to resources directory)', $jsPath.'/Components')
         );
     }
 

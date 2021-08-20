@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TPG\Vitamin\Installers;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,6 +30,6 @@ class NodeDependencyInstaller implements InstallerContract
 
     protected function getProcessRunner(array $dependencies = []): Process
     {
-        return Process::fromShellCommandline('yarn add --dev '.implode(' ', $dependencies));
+        return Process::fromShellCommandline('yarn add --dev '.implode(' ', $dependencies), timeout: 0);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TPG\Vitamin\Installers;
 
 use Illuminate\Support\Arr;
@@ -37,6 +39,6 @@ class ComposerDependencyInstaller implements InstallerContract
         if ($dev) {
             $command .= '--dev';
         }
-        return Process::fromShellCommandline($command.' '.implode(' ', $packages));
+        return Process::fromShellCommandline($command.' '.implode(' ', $packages), timeout: 0);
     }
 }

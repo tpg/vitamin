@@ -14,8 +14,7 @@ export default ({command}) => ({
     },
     resolve: {
         alias: {
-            '@Pages': path.resolve(__dirname + '/resources/$PAGESPATH$'),
-            '@Components': path.resolve(__dirname + '/resources/$COMPONENTSPATH$')
+            '@': path.resolve(__dirname + '/resources/$JSSPATH$'),
         }
     },
     plugins: [
