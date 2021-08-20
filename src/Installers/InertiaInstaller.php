@@ -45,7 +45,7 @@ class InertiaInstaller implements InstallerContract
         $index = $lines->filter(fn ($line) => strstr($line, 'SubstituteBindings::class'))->keys()->first();
         $after = $lines->splice($index + 1);
 
-        $lines->push(str_repeat(' ', 8).'App\Middleware\HandleInertiaRequests::class,');
+        $lines->push(str_repeat(' ', 12).'App\Middleware\HandleInertiaRequests::class,');
         $lines = $lines->concat($after);
 
         file_put_contents(app_path('Http/Kernel.php'), implode("\n", $lines->toArray()));
