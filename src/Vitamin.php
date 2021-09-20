@@ -30,7 +30,7 @@ class Vitamin
 
         return new HtmlString(<<<HTML
             <script type="module" src="/build/{$manifest[$js]['file']}"></script>
-            <script type="module" src="/build/{$manifest[$js]['css'][0]}"></script>
+            <link rel="stylesheet" href="/build/{$manifest[$js]['css'][0]}" />
         HTML);
     }
 
