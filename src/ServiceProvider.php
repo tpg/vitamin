@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TPG\Vitamin;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use TPG\Vitamin\Composers\AppComposer;
@@ -22,6 +23,9 @@ class ServiceProvider extends LaravelServiceProvider
 
     public function register(): void
     {
-        View::composer('app', AppComposer::class);
+//        View::composer('app', AppComposer::class);
+        Blade::directive('vitamin', function (string $jsPath = null) {
+            return (new Vitamin())->getViteAssets($jsPath);
+        });
     }
 }
