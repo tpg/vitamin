@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.14] 2021-09-20
+### Added
+- Added a `@vitamin` blade directive instead of the `{!! $vitamin !! }` thing. Although it does require a cache reset when either building or running the dev server.
+- Fixed a bug in the new `Vitamin` class that was returning the incorrect element when linking to the CSS.
+
 ## [0.0.13] 2021-08-23
 ### Fixed
 - Fixed a typo in the "@" alias set in `vite.config.js`.
