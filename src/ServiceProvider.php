@@ -23,9 +23,9 @@ class ServiceProvider extends LaravelServiceProvider
 
     public function register(): void
     {
-//        View::composer('app', AppComposer::class);
-        Blade::directive('vitamin', function (string $jsPath = null) {
-            return (new Vitamin())->getViteAssets($jsPath);
-        });
+        View::composer('app', AppComposer::class);
+//        Blade::directive('vitamin', function (string $jsPath = null) {
+//            return (new Vitamin())->getViteAssets($jsPath);
+//        });
     }
 }
