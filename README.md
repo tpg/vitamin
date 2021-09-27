@@ -5,26 +5,8 @@ A highly opinionated packaged boilerplate solution for Laravel.
 ## What
 Vitamin will install all the bit and pieces needed to get Vite, Tailwind, Vue 3, Inertia and Ziggy working with Laravel running on a local Valet installation. This is super-duper opinionated, but could be customized to include other stuff.
 
-## Private Package
-Vitamin is currently a private package. I might release it as open source at some point, but not just yet. So, you'll need a Repman token to install Vitamin (which you have to ask me for). Once you have a token, you can add it to Composer using the following:
-
-```shell
-composer config --global --auth http-basic.thepublicgood.repo.repman.io token <TOKEN>
-```
-
-Then update your project `composer.json` file and add the following:
-
-```json
-{
-    "repositories": [
-        {
-            "type": "composer", "url": "https://thepublicgood.repo.repman.io"
-        }
-    ]
-}
-```
-
-Now install Vitamin using Composer:
+## Installation
+Like everything Laravel, install Vitamin via Composer:
 
 ```shell
 composer require thepublicgood/vitamin
