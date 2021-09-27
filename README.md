@@ -126,6 +126,3 @@ this.route('home');
 ```
 
 Vitamin sets up Ziggy routes in the `resources/js/routes.js` file. This file needs to be regenerated each time your change your Laravel routes. Vitamin does this automatically by creating a simple Vite plugin that will run the `yarn routes` script each time a Laravel routes file changes. However, if you ever need to rebuild the routes, simply run `yarn routes` yourself.
-
-## Using this with Attaché
-Attache is an opinionated deployment solution for Laravel. However, it was designed around how I used Webpack. Vite has changed a few things and now breaks how Attaché works. However, you can fool Attaché into working by simply creating an empty `public/js` and an empty `public/css` directories and making sure to include `public/build` in the `assets` setting. That way Attaché will copy the empty `js` and `css` directories, as well as the compiled assets in `build`. Alternatively you can use Envoy easily enough.
