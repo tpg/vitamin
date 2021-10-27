@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] 2021-10-27
+### Added
+- Added a `vitamin.php` config file. Just so you can specify the view composer class.
+
 ## [0.0.15] 2021-09-21
 ### Removed
 - Removed the blade `@vitamin` directive as it's causing problems as Laravel's blade cache.

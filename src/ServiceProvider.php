@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace TPG\Vitamin;
 
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-use TPG\Vitamin\Composers\AppComposer;
 use TPG\Vitamin\Console\InitCommand;
 
 class ServiceProvider extends LaravelServiceProvider
@@ -19,13 +17,18 @@ class ServiceProvider extends LaravelServiceProvider
                 InitCommand::class,
             ]);
         }
+
+        $this->publishes([
+            __DIR__.'/../config/vitamin.php' => config_path('vitamin.php'),
+        ]);
     }
 
     public function register(): void
     {
-        View::composer('app', AppComposer::class);
-//        Blade::directive('vitamin', function (string $jsPath = null) {
-//            return (new Vitamin())->getViteAssets($jsPath);
-//        });
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/vitamin.php', 'vitamin'
+        );
+
+        View::composer('app', config('vitamin.composer'));
     }
 }
