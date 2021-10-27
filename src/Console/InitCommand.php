@@ -14,6 +14,7 @@ use TPG\Vitamin\Installers\NodeDependencyInstaller;
 use TPG\Vitamin\Installers\NodeScriptInstaller;
 use TPG\Vitamin\Installers\TailwindInstaller;
 use TPG\Vitamin\Installers\ViewComposerInstaller;
+use TPG\Vitamin\Installers\VitaminConfigInstaller;
 
 class InitCommand extends Command
 {
@@ -22,6 +23,7 @@ class InitCommand extends Command
     protected $description = 'Initialize a new Vitamin project';
 
     protected array $installers = [
+        VitaminConfigInstaller::class,
         ConfigInstaller::class,
         NodeDependencyInstaller::class,
         NodeScriptInstaller::class,

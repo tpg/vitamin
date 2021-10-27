@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConfigInstaller implements InstallerContract
 {
-    public function __construct(public InputInterface $input, public OutputInterface $output)
+    public function __construct(protected InputInterface $input, protected OutputInterface $output)
     {
     }
 
