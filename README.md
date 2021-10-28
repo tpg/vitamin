@@ -63,22 +63,12 @@ class AppComposer extends VitaminAppComposer
 }
 ```
 
-You'll need to make sure your app binds your new composer instead of the default one. You can do this in the `boot` method of your `AppServiceProvider`:
+You'll need to make sure your app binds your new composer instead of the default one. You can do this through the `vitamin.php` config file which you'll find in your `config` directory. Simply change the `composer` config option to point to your new class:
 
 ```php
-namespace App\Providers;
-
-use App\Composers\AppComposer;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
-
-class AppServiceProvider extends ServiceProvider
-{
-    public function boot()
-    {
-        View::composer('app', AppComposer::class);
-    }
-}
+[
+    'composer' => App\Composers\AppComposer::class,
+]
 ```
 
 That's it. Now your app will use your new composer instead of the default Vitamin one. If you need to override the `compose` method, remember to call `parent::compose()`:
