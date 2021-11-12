@@ -106,7 +106,7 @@ class InitCommand extends Command
 
     protected function getHost(): string
     {
-        return $this->ask('What hostname are using in development? (e.g.: valet.test): ');
+        return $this->ask('What hostname are you using in development? (e.g.: valet.test): ');
     }
 
     protected function getJsPath(): string

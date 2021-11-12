@@ -35,7 +35,9 @@ class JavaScriptInstaller implements InstallerContract
                 $data = str_replace($var, $value, $data);
             }
 
-            file_put_contents(base_path('resources/js/'.$file), $data);
+            $jsPath = Arr::get($settings, '$JSPATH$');
+
+            file_put_contents(base_path('resources/'.$jsPath.'/'.$file), $data);
             $this->output->write('.');
         });
 

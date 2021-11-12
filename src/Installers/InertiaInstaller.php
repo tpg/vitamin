@@ -31,6 +31,7 @@ class InertiaInstaller implements InstallerContract
 
         $this->installMiddleware();
         $this->buildRoutes();
+        $this->createPaths($settings);
 
         $this->output->writeln('[<info>✔</info>]');
     }
@@ -57,5 +58,23 @@ class InertiaInstaller implements InstallerContract
         $process = Process::fromShellCommandline('yarn routes');
         $process->run();
         $this->output->write('.');
+    }
+
+    public function createPaths(array $settings): void
+    {
+        $paths = [
+            Arr::get($settings, 'variables.$PAGESPATH$'),
+        ];
+
+        foreach ($paths as $path) {
+            $fullPath = base_path('resources/'.$path);
+            if (! is_dir($fullPath)) {
+                if (! mkdir($fullPath) && ! is_dir($fullPath)) {
+                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $fullPath));
+                }
+            }
+
+            $this->output->write('.');
+        }
     }
 }
