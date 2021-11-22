@@ -4,12 +4,12 @@ import {exec} from 'child_process';
 
 export default ({command}) => ({
     base: command === 'serve' ? '' : '/build/',
-    publicDir: 'fake_dir_that_doesnt_exist',
+    publicDir: false,
     build: {
         manifest: true,
         outDir: 'public/build',
         rollupOptions: {
-            input: 'resources/js/app.js',
+            input: 'resources/$JSPATH$/app.js',
         },
     },
     resolve: {
