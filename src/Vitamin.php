@@ -6,6 +6,7 @@ namespace TPG\Vitamin;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 class Vitamin
 {
@@ -16,8 +17,9 @@ class Vitamin
         $js = $jsPath ?: $this->jsPath;
 
         $host = config('app.url');
+        $tls = Str::lower(Str::before($host, '://')) === 'https';
 
-        if ($this->devServerRunning()) {
+        if ($this->devServerRunning($tls)) {
             return new HtmlString(<<<HTML
                 <script type="module" src="$host:3000/@vite/client"></script>
                 <script type="module" src="$host:3000/$js"></script>
@@ -34,11 +36,12 @@ class Vitamin
         HTML);
     }
 
-    protected function devServerRunning(): bool
+    protected function devServerRunning(bool $tls = false): bool
     {
         if (app()->environment('local')) {
             try {
-                Http::get('http://localhost:3000');
+                $schema = $tls ? 'https' : 'http';
+                Http::withoutVerifying()->get($schema.'://localhost:3000');
                 return true;
             } catch (\Exception) {}
         }
