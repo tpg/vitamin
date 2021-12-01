@@ -98,3 +98,47 @@ this.route('home');
 ```
 
 Vitamin sets up Ziggy routes in the `resources/js/routes.js` file. This file needs to be regenerated each time your change your Laravel routes. Vitamin does this automatically by creating a simple Vite plugin that will run the `yarn routes` script each time a Laravel routes file changes. However, if you ever need to rebuild the routes, simply run `yarn routes` yourself.
+
+## TLS Certificates
+It's possible to get all of this to work with TLS as well so you can use `https`. First, you need to get Valet to secure your site. Valet provides a simple solution for this. If you're serving your site at `mysite.test` then you can get Valet to generate a new certificate like this:
+
+```shell
+valet secure mysite
+```
+
+It will likely ask you for your password and will generate a new certificate. You'll also need to get Vite to do the same thing. The easiest way to do this is to use the `mkcert` Vite plugin. First, install the plugin:
+
+```shell
+yarn add vite-plugin-mkcert -D
+```
+
+Update the `vite.config.js` file and add set `server.https` to `true` and add `mkcert()` to the plugins array:
+
+```js
+export default({command}) => ({
+    //...
+    
+    server: {
+        https: true,
+    },
+    
+    plugins: [
+        vue(),
+        mkcert(),
+        
+        //..
+    ],
+});
+```
+
+Lastly update the `package.json` file to tell Vite to run in `https` mode:
+
+```json
+{
+    "scripts": {
+        "dev": "vite serve --host=mysite.test --https"
+    }
+}
+```
+
+The first time you run `yarn dev`, you'll likely be asked for your password so that the mkcert plugin can generate a new certificate. I might add an HTTPS question to the Vitamin setup at some point. If and when I do, I'll update this.
