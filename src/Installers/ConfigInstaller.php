@@ -4,35 +4,25 @@ declare(strict_types=1);
 
 namespace TPG\Vitamin\Installers;
 
+use Illuminate\Support\Arr;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ConfigInstaller implements InstallerContract
+class ConfigInstaller extends AbstractInstaller
 {
-    public function __construct(protected InputInterface $input, protected OutputInterface $output)
+    protected function filesToCopy(): array
     {
+        return [
+            'jsconfig.json' => base_path('jsconfig.json'),
+            'vite.config.js' => base_path('vite.config.js'),
+            'LocalValetDriver.php' => base_path('LocalValetDriver.php'),
+        ];
     }
 
-    public function handle(array $settings = []): void
+    public function handle(): void
     {
-        $files = [
-            'jsconfig.json',
-            'vite.config.js',
-            'LocalValetDriver.php',
-        ];
+        $this->start('Installing configs');
 
-        $this->output->write('Installing configs');
-        collect($files)->each(function ($file) use ($settings) {
-            $data = file_get_contents(__DIR__.'/../../stubs/'.$file);
-
-            foreach ($settings['variables'] as $var => $value) {
-                $data = str_replace($var, $value, $data);
-            }
-
-            file_put_contents(base_path($file), $data);
-            $this->output->write('.');
-        });
-
-        $this->output->writeln('[<info>✔</info>]');
+        $this->done();
     }
 }

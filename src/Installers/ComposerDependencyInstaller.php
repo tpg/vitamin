@@ -5,32 +5,35 @@ declare(strict_types=1);
 namespace TPG\Vitamin\Installers;
 
 use Illuminate\Support\Arr;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
-class ComposerDependencyInstaller implements InstallerContract
+class ComposerDependencyInstaller extends AbstractInstaller
 {
-    public function __construct(protected InputInterface $input, protected OutputInterface $output)
+    public function handle(): void
     {
+        $this->dependencies();
+        $this->dependencies(true);
+
+        $this->start('Installing composer dev dependencies');
+
+        $this->getProcessInstance(Arr::get($this->settings, 'composer.dev'), true)->run(function (string $type, string $buffer) {
+            $this->output->write('.');
+        });
+
+        $this->done();
     }
 
-    public function handle(array $settings = []): void
+    protected function dependencies(bool $dev = false): void
     {
-        $this->output->write('Installing composer dependencies');
+        $this->start('Installing '. ($dev ? 'dev ' : null) .'composer dependencies');
 
-        $this->getProcessInstance(Arr::get($settings, 'composer.require'))->run(function (string $type, string $buffer) {
+        $dependencies = Arr::get($this->settings, $dev ? 'composer.dev' : 'composer.require');
+
+        $this->getProcessInstance($dependencies, $dev)->run(function (string $type, string $buffer) {
             $this->output->write('.');
         });
 
-        $this->output->writeln('[<info>✔</info>]');
-        $this->output->write('Installing composer dev dependencies');
-
-        $this->getProcessInstance(Arr::get($settings, 'composer.dev'), true)->run(function (string $type, string $buffer) {
-            $this->output->write('.');
-        });
-
-        $this->output->writeln('[<info>✔</info>]');
+        $this->done();
     }
 
     protected function getProcessInstance(array $packages, bool $dev = false): Process

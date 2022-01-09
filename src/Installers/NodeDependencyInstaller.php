@@ -4,28 +4,23 @@ declare(strict_types=1);
 
 namespace TPG\Vitamin\Installers;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
-class NodeDependencyInstaller implements InstallerContract
+class NodeDependencyInstaller extends AbstractInstaller
 {
-    public function __construct(protected InputInterface $input, protected OutputInterface $output)
-    {
-    }
-
     public function handle(array $settings = []): void
     {
+        $this->start('Installing node dependencies');
+
         $dependencies = $settings['node'] ?? [];
 
         $process = $this->getProcessRunner($dependencies);
 
-        $this->output->write('Installing node dependencies');
         $process->run(function (string $type, string $buffer) {
             $this->output->write('.');
         });
 
-        $this->output->writeln('[<info>✔</info>]');
+        $this->done();
     }
 
     protected function getProcessRunner(array $dependencies = []): Process

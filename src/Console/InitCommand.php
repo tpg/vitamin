@@ -73,13 +73,6 @@ class InitCommand extends Command
                 'vite',
                 'vue@next',
             ],
-            'scripts' => [
-                'dev' => 'vite serve --host='.$host,
-                'production' => 'vite build',
-                'prod' => 'yarn production',
-                'routes' => 'php ./artisan ziggy:generate resources/js/routes.js',
-                'horizon' => 'php ./artisan horizon',
-            ],
             'composer' => [
                 'require' => [
                     'inertiajs/inertia-laravel',
@@ -99,7 +92,7 @@ class InitCommand extends Command
         collect($this->installers)
             ->each(fn (string $installer) =>
             (new $installer($this->input, $this->output))
-                ->handle($settings));
+                ->run($settings));
 
         return 0;
     }

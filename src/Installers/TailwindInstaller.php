@@ -4,27 +4,23 @@ declare(strict_types=1);
 
 namespace TPG\Vitamin\Installers;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Process;
+use Illuminate\Support\Arr;
 
-class TailwindInstaller implements InstallerContract
+class TailwindInstaller extends AbstractInstaller
 {
-    public function __construct(protected InputInterface $input, protected OutputInterface $output)
+    protected function filesToCopy(): array
     {
+        return [
+            'app.css' => resource_path('css/app.css'),
+            'postcss.config.js' => base_path('postcss.config.js'),
+            'tailwind.config.js' => base_path('tailwind.config.js'),
+        ];
     }
 
     public function handle(array $settings = []): void
     {
-        $this->output->write('Installing Tailwind');
+        $this->start('Installing Tailwind');
 
-        copy(__DIR__.'/../../stubs/app.css', resource_path('css/app.css'));
-        $this->output->write('.');
-
-        $process = Process::fromShellCommandline('npx tailwind init -p');
-        $process->run();
-        $this->output->write('.');
-
-        $this->output->writeln('[<info>✔</info>]');
+        $this->done();
     }
 }

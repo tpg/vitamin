@@ -11,5 +11,5 @@ interface InstallerContract
 {
     public function __construct(InputInterface $input, OutputInterface $output);
 
-    public function handle(array $settings = []): void;
+    public function handle(): void;
 }
