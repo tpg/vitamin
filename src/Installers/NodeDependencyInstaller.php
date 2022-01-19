@@ -25,6 +25,6 @@ class NodeDependencyInstaller extends AbstractInstaller
 
     protected function getProcessRunner(array $dependencies = []): Process
     {
-        return Process::fromShellCommandline('yarn add --dev '.implode(' ', $dependencies), timeout: 0);
+        return Process::fromShellCommandline('yarn add '.implode(' ', $dependencies).' -D', timeout: 0);
     }
 }
