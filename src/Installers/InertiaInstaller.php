@@ -40,7 +40,7 @@ class InertiaInstaller extends AbstractInstaller
         $this->runArtisanCommand('inertia:middleware');
 
         $this->insert(app_path('Http/Kernel.php'), [
-            str_repeat(' ', 12).'\App\Http\HandleInertiaRequests::class',
+            str_repeat(' ', 12).'\App\Http\Middleware\HandleInertiaRequests::class',
         ], 'SubstituteBindings::class');
     }
 
