@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TPG\Vitamin\Installers;
 
-class VitaminConfigInstaller extends AbstractInstaller
+class   VitaminConfigInstaller extends AbstractInstaller
 {
     protected function filesToCopy(): array
     {
@@ -13,7 +13,7 @@ class VitaminConfigInstaller extends AbstractInstaller
         ];
     }
 
-    public function handle(array $settings = []): void
+    public function handle(): void
     {
         $this->start('Installing Vitamin configuration');
 

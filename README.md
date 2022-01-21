@@ -1,6 +1,6 @@
 # Vitamin
 
-A highly opinionated packaged boilerplate solution for Laravel.
+A highly opinionated packaged boilerplate solution for installing Vite, Tailwind and Inertia (along a few other things) into a Laravel app.
 
 ## What
 Vitamin will install all the bit and pieces needed to get Vite, Tailwind, Vue 3, Inertia and Ziggy working with Laravel running on a local Valet installation. This is super-duper opinionated, but could be customized to include other stuff.

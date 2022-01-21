@@ -14,7 +14,7 @@ class ViewComposerInstaller extends AbstractInstaller
         ];
     }
 
-    public function handle(array $settings = []): void
+    public function handle(): void
     {
         $this->start('Installing the view composer...');
 

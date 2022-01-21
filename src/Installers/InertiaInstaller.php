@@ -24,13 +24,13 @@ class InertiaInstaller extends AbstractInstaller
         ];
     }
 
-    public function handle(array $settings = []): void
+    public function handle(): void
     {
         $this->start('Installing Inertia');
 
         $this->installMiddleware();
         $this->buildRoutes();
-        $this->createPaths($settings);
+        $this->createPaths($this->settings);
 
         $this->done();
     }

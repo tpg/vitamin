@@ -7,6 +7,11 @@
             "TPG\\Vitamin\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "TPG\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "THEPUBLICGOOD",

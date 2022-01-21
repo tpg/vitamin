@@ -26,7 +26,7 @@ class JavaScriptInstaller extends AbstractInstaller
         ];
     }
 
-    public function handle(array $settings = []): void
+    public function handle(): void
     {
         $this->start('Installing JS files');
 

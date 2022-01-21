@@ -6,6 +6,8 @@ namespace TPG\Vitamin\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use TPG\Vitamin\Contracts\VitaminInterface;
+use TPG\Vitamin\Installers\AbstractInstaller;
 use TPG\Vitamin\Installers\ComposerDependencyInstaller;
 use TPG\Vitamin\Installers\ConfigInstaller;
 use TPG\Vitamin\Installers\InertiaInstaller;
@@ -22,32 +24,19 @@ class InitCommand extends Command
 
     protected $description = 'Initialize a new Vitamin project';
 
-    protected array $installers = [
-        VitaminConfigInstaller::class,
-        ConfigInstaller::class,
-        NodeDependencyInstaller::class,
-        NodeScriptInstaller::class,
-        JavaScriptInstaller::class,
-        TailwindInstaller::class,
-        ComposerDependencyInstaller::class,
-        InertiaInstaller::class,
-//        ViewComposerInstaller::class,
-    ];
-
-    public function handle(): int
+    public function handle(VitaminInterface $vitamin): int
     {
         $this->info('Running this command will overwrite some vital files that may cause an existing Laravel project to fail.');
         if ($this->confirm('Are you sure you want to continue?', false)) {
-            return $this->install();
+            return $this->install($vitamin);
         }
 
         $this->info('No changes have been made.');
-        return 0;
+        return 1;
     }
 
-    protected function install(): int
+    protected function install(VitaminInterface $vitamin): int
     {
-
         $host = $this->getHost();
         $js = $this->getJsPath();
         $pages = $this->getPagesPath($js);
@@ -89,17 +78,19 @@ class InitCommand extends Command
             ]
         ];
 
-        collect($this->installers)
-            ->each(fn (string $installer) =>
-            (new $installer($this->input, $this->output))
-                ->run($settings));
+        if ($vitamin->getInstallers()->count() === 0) {
+            $vitamin->initializeInstallers($this->input, $this->output);
+        }
+
+        collect($vitamin->getInstallers())
+            ->each(fn (AbstractInstaller $installer) => $installer->run($settings));
 
         return 0;
     }
 
     protected function getHost(): string
     {
-        return $this->ask('What hostname are you using in development? (e.g.: valet.test): ');
+        return $this->ask('What hostname are you using in development? (e.g.: valet.test):');
     }
 
     protected function getJsPath(): string

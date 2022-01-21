@@ -7,6 +7,7 @@ namespace TPG\Vitamin;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use TPG\Vitamin\Console\InitCommand;
+use TPG\Vitamin\Contracts\VitaminInterface;
 
 class ServiceProvider extends LaravelServiceProvider
 {
@@ -28,6 +29,8 @@ class ServiceProvider extends LaravelServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/vitamin.php', 'vitamin'
         );
+
+        $this->app->singleton(VitaminInterface::class, Vitamin::class);
 
         View::composer('app', config('vitamin.composer'));
     }
