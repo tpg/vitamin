@@ -34,7 +34,7 @@ abstract class AbstractInstaller implements InstallerContract
 
             $this->prepDestination($destination);
 
-            $data = file_get_contents(__DIR__.'/../../stubs/'.$source);
+            $data = file_get_contents($source);
 
             foreach ($this->variables() as $var => $value) {
                 $data = str_replace($var, $value, $data);
@@ -46,9 +46,14 @@ abstract class AbstractInstaller implements InstallerContract
         });
     }
 
+    protected function stubPath(string $filename): string
+    {
+        return __DIR__.'/../../stubs/'.$filename;
+    }
+
     protected function variables(): array
     {
-        return Arr::get($this->settings, 'variables');
+        return Arr::get($this->settings, 'variables', []);
     }
 
     protected function removeFiles(): void

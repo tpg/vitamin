@@ -20,7 +20,7 @@ class InertiaInstaller extends AbstractInstaller
     protected function filesToCopy(): array
     {
         return [
-            'app.blade.php' => resource_path('views/app.blade.php'),
+            $this->stubPath('app.blade.php') => resource_path('views/app.blade.php'),
         ];
     }
 

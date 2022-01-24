@@ -11,9 +11,9 @@ class TailwindInstaller extends AbstractInstaller
     protected function filesToCopy(): array
     {
         return [
-            'app.css' => resource_path('css/app.css'),
-            'postcss.config.js' => base_path('postcss.config.js'),
-            'tailwind.config.js' => base_path('tailwind.config.js'),
+            $this->stubPath('app.css') => resource_path('css/app.css'),
+            $this->stubPath('postcss.config.js') => base_path('postcss.config.js'),
+            $this->stubPath('tailwind.config.js') => base_path('tailwind.config.js'),
         ];
     }
 

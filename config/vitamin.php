@@ -15,6 +15,9 @@ return [
      */
     'composer' => \TPG\Vitamin\Composers\AppComposer::class,
 
+    /*
+     * Installers are run in the order they are specified.
+     */
     'installers' => [
         VitaminConfigInstaller::class,
         ConfigInstaller::class,

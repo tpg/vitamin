@@ -10,7 +10,7 @@ class ViewComposerInstaller extends AbstractInstaller
     protected function filesToCopy(): array
     {
         return [
-            'AppComposer.php' => app_path('Http/Composers/AppComposer.php'),
+            $this->stubPath('AppComposer.php') => app_path('Http/Composers/AppComposer.php'),
         ];
     }
 

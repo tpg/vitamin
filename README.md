@@ -114,7 +114,7 @@ It will likely ask you for your password and will generate a new certificate. Yo
 yarn add vite-plugin-mkcert -D
 ```
 
-Update the `vite.config.js` file and add set `server.https` to `true` and add `mkcert()` to the plugins array:
+Update the `vite.config.js` file and set `server.https` to `true` and add `mkcert()` to the plugins array:
 
 ```js
 export default({command}) => ({

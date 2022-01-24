@@ -9,7 +9,7 @@ class   VitaminConfigInstaller extends AbstractInstaller
     protected function filesToCopy(): array
     {
         return [
-            '../config/vitamin.php' => config_path('vitamin.php'),
+            __DIR__.'/../../config/vitamin.php' => config_path('vitamin.php'),
         ];
     }
 
