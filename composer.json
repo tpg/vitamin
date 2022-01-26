@@ -20,13 +20,13 @@
     ],
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^8.50",
-        "symfony/process": "^5.3"
+        "laravel/framework": "^8.50|^9.0",
+        "symfony/process": "^5.3|^6.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^9.5",
-        "orchestra/testbench": "^v6.0"
+        "orchestra/testbench": "^v6.0|^7.0"
     },
     "extra": {
         "laravel": {
