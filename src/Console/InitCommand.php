@@ -38,12 +38,14 @@ class InitCommand extends Command
     protected function install(VitaminInterface $vitamin): int
     {
         $host = $this->getHost();
+        $port = $this->getPort();
         $js = $this->getJsPath();
         $pages = $this->getPagesPath($js);
 
         $settings = [
             'variables' => [
                 '$HOST$' => $host,
+                '$PORT$' => $port,
                 '$JSPATH$' => $js,
                 '$PAGESPATH$' => $pages,
             ],
@@ -91,6 +93,11 @@ class InitCommand extends Command
     protected function getHost(): string
     {
         return $this->ask('What hostname are you using in development? (e.g.: valet.test):');
+    }
+
+    protected function getPort(): int
+    {
+        return $this->ask('What port number should Vite use?', 3000);
     }
 
     protected function getJsPath(): string

@@ -1,23 +1,11 @@
 {
     "scripts": {
-        "dev": "vite serve --host=$HOST$",
+        "dev": "php ./artisan vitamin:serve",
         "production": "vite build",
         "prod": "yarn production",
         "routes": "php ./artisan ziggy:generate resources/js/routes.js",
         "horizon": "php ./artisan horizon"
     },
     "dependencies": {
-        "@inertiajs/inertia": "^0.10.0",
-        "@inertiajs/inertia-vue3": "^0.5.1",
-        "@inertiajs/progress": "^0.2.6",
-        "@vitejs/plugin-vue": "^1.2.5",
-        "@vue/compiler-sfc": "^3.1.4",
-        "autoprefixer": "^10.3.1",
-        "axios": "^0.21",
-        "lodash": "^4.17.19",
-        "postcss": "^8.3.5",
-        "tailwindcss": "^2.2.4",
-        "vite": "^2.4.2",
-        "vue": "^3.1.4"
     }
 }

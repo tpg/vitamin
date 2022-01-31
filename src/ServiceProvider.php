@@ -7,15 +7,17 @@ namespace TPG\Vitamin;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use TPG\Vitamin\Console\InitCommand;
+use TPG\Vitamin\Console\ViteServeCommand;
 use TPG\Vitamin\Contracts\VitaminInterface;
 
 class ServiceProvider extends LaravelServiceProvider
 {
     public function boot(): void
     {
-        if ($this->app->runningInConsole() && ! file_exists(base_path('vite.config.js'))) {
+        if ($this->app->runningInConsole()) {
             $this->commands([
                 InitCommand::class,
+                ViteServeCommand::class,
             ]);
         }
 
