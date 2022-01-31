@@ -97,7 +97,7 @@ class InitCommand extends Command
 
     protected function getPort(): int
     {
-        return $this->ask('What port number should Vite use?', 3000);
+        return (int)$this->ask('What port number should Vite use?', 3000);
     }
 
     protected function getJsPath(): string
