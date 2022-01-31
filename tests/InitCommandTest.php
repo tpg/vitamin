@@ -42,7 +42,6 @@ class InitCommandTest extends TestCase
         $this->artisan(InitCommand::class)
             ->expectsConfirmation('Are you sure you want to continue?', 'yes')
             ->expectsQuestion('What hostname are you using in development? (e.g.: valet.test):', 'vitamin.test')
-            ->expectsQuestion('What port number should Vite use?', '3000')
             ->expectsQuestion('Where are your JS sources stored? (relative to resources directory)', 'js')
             ->expectsQuestion('Where are your Inertia Vue pages stored? (relative to resources directory)', 'js/Pages')
             ->assertExitCode(0);
