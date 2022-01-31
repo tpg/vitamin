@@ -54,10 +54,14 @@ The following NPM packages are installed:
 - [vue](https://github.com/vuejs/vue)
 
 ## Usage
-Vitamin will add a few NPM scripts (although, note that it expects Yarn to be present during installation). To start a new Vite dev server, run:
+Vitamin will add a few NPM scripts (note that it expects Yarn to be present during installation). To start a new Vite dev server, run:
 
 ```shell
 yarn dev
+
+// or
+
+php ./artisan vitamin:serve
 ```
 
 Vite will run a dev server on your local machine on port 3000 (it will automatically increment the port number if 3000 isn't available). Once it's running, you should see something like:
