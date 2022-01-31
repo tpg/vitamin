@@ -11,6 +11,11 @@ use TPG\Vitamin\Installers\VitaminConfigInstaller;
 
 return [
     /*
+     * The port number vite should run on.
+     */
+    'port' => 3000,
+
+    /*
      * The view composer class to use
      */
     'composer' => \TPG\Vitamin\Composers\AppComposer::class,

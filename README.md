@@ -73,6 +73,16 @@ Vite will run a dev server on your local machine on port 3000 (it will automatic
 
 This is the dev server. You'll also need to make sure you create a new Valet link, then you should be able to visit your new project at `http://vitamin.test` or whatever your Valet address is.
 
+### Port number
+By default Vite will run on port 3000 but will increment the port number by 1 if 3000 is already in use. Vitamin won't know that the port number has been incremented, but you can specify a port number by changing the `port` setting in the `vitamin.php` config file.
+
+```php
+return [
+	"port" => 3002,
+	//...
+]
+```
+
 ### Building for production
 To build your project for production:
 

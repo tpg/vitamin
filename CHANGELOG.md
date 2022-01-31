@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.3.2] 2022-01-31
 ### Added
-- Laravel 9 support.
+- Added support for a custom port number to be set.
+- Change to an HTTP HEAD request instead of a GET request when checking if the dev server is running.
+
+## [0.3.1] 2022-01-27
+- Laravel 9+ support.
 
 ## [0.3.0] 2022-01-21
 ### Fixed
