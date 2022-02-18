@@ -48,7 +48,7 @@ class Vitamin implements VitaminInterface
 
         $port = config('vitamin.port', 3000);
 
-        if ($this->devServerRunning($host, $port, $tls)) {
+        if ($this->devServerRunning(Str::after($host, '://'), $port, $tls)) {
             return new HtmlString(<<<HTML
                 <script type="module" src="$host:$port/@vite/client"></script>
                 <script type="module" src="$host:$port/$js"></script>

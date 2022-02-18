@@ -6,6 +6,7 @@ namespace TPG\Vitamin\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 use TPG\Vitamin\Contracts\VitaminInterface;
 
@@ -19,7 +20,7 @@ class ViteServeCommand extends Command
     {
         $exec = 'npx vite serve';
         $params = [
-            '--host' => $this->option('host') ?? config('app.url'),
+            '--host' => $this->host(),
             '--port' => $this->option('port') ?? config('vitamin.port'),
             '--strictPort' => true,
         ];
@@ -40,5 +41,11 @@ class ViteServeCommand extends Command
         });
 
         return self::SUCCESS;
+    }
+
+    protected function host(): string
+    {
+        $url = config('app.url');
+        return $this->option('host') ?? Str::after($url, '://');
     }
 }

@@ -21,6 +21,8 @@ class InertiaInstaller extends AbstractInstaller
     {
         return [
             $this->stubPath('app.blade.php') => resource_path('views/app.blade.php'),
+            $this->stubPath('Welcome.vue') => resource_path(Arr::get($this->settings, 'variables.$PAGESPATH$').'/Welcome.vue'),
+            $this->stubPath('web.routes.php') => base_path('routes/web.php'),
         ];
     }
 
@@ -43,6 +45,7 @@ class InertiaInstaller extends AbstractInstaller
             str_repeat(' ', 12).'\App\Http\Middleware\HandleInertiaRequests::class',
         ], 'SubstituteBindings::class');
     }
+
 
     protected function buildRoutes(): void
     {
