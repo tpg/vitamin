@@ -37,7 +37,7 @@ abstract class AbstractInstaller implements InstallerContract
             $data = file_get_contents($source);
 
             foreach ($this->variables() as $var => $value) {
-                $data = str_replace($var, $value, $data);
+                $data = str_replace($var, (string)$value, $data);
             }
 
             file_put_contents($destination, $data);
