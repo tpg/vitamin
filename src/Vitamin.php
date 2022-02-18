@@ -48,7 +48,7 @@ class Vitamin implements VitaminInterface
 
         $port = config('vitamin.port', 3000);
 
-        if ($this->devServerRunning($port, $tls)) {
+        if ($this->devServerRunning($host, $port, $tls)) {
             return new HtmlString(<<<HTML
                 <script type="module" src="$host:$port/@vite/client"></script>
                 <script type="module" src="$host:$port/$js"></script>
@@ -63,12 +63,12 @@ class Vitamin implements VitaminInterface
         HTML);
     }
 
-    protected function devServerRunning(int $port, bool $tls = false): bool
+    protected function devServerRunning(string $host, int $port, bool $tls = false): bool
     {
         if (app()->environment('local')) {
             try {
                 $schema = $tls ? 'https' : 'http';
-                Http::withoutVerifying()->head("$schema://localhost:$port");
+                Http::withoutVerifying()->head("$schema://$host:$port/@vite/client");
                 return true;
             } catch (\Exception) {}
         }
