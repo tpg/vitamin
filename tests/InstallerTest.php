@@ -18,10 +18,17 @@ class InstallerTest extends TestCase
     {
         $installer = $this->installer();
 
-        touch(__DIR__.'/source1');
-        touch(__DIR__.'/source2');
+        $this->createTestStub('source1');
+        $this->createTestStub('source2');
 
-        $installer->run();
+        $installer->run([
+            'variables' => [
+                '$HOST$' => 'hostname',
+                '$PORT$' => 3000,
+                '$JSPATH$' => 'jspath',
+                '$PAGESPATH$' => 'pages',
+            ]
+        ]);
 
         self::assertFileExists(__DIR__.'/target1');
         self::assertFileExists(__DIR__.'/target2');
@@ -29,6 +36,16 @@ class InstallerTest extends TestCase
         foreach(['source1', 'source2', 'target1', 'target2'] as $file) {
             unlink(__DIR__.'/'.$file);
         }
+    }
+
+    protected function createTestStub(string $filename): void
+    {
+        file_put_contents(__DIR__.'/'.$filename, implode("\n", [
+            'HOST=$HOST$',
+            'PORT=$PORT$',
+            'JSPATH=$JSPATH$',
+            'PAGESPATH=$PAGESPATH$',
+        ]));
     }
 
     protected function installer(): AbstractInstaller
