@@ -76,8 +76,13 @@ abstract class AbstractInstaller implements InstallerContract
     protected function runShellCommand(string $command): void
     {
         $process = Process::fromShellCommandline($command);
-        $process->mustRun();
-        $this->output->write('.');
+        $process->mustRun(function ($type, $buffer) {
+            $this->output->write('.');
+            if ($type === Process::ERR) {
+                $this->output->writeln('');
+                $this->output->writeln('<info>'.$buffer.'</info>');
+            }
+        });
     }
 
     protected function insert(string $filename, array $lines, string $afterContains): void

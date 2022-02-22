@@ -26,8 +26,8 @@ return [
     'installers' => [
         VitaminConfigInstaller::class,
         ConfigInstaller::class,
-        NodeDependencyInstaller::class,
         NodeScriptInstaller::class,
+        NodeDependencyInstaller::class,
         JavaScriptInstaller::class,
         TailwindInstaller::class,
         ComposerDependencyInstaller::class,
