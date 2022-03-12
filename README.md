@@ -5,7 +5,7 @@
 A highly opinionated packaged boilerplate solution for installing Vite, Tailwind and Inertia (along a few other things) into a Laravel app.
 
 ## What
-Vitamin will install all the bits and pieces needed to get Vite, Tailwind, Vue 3, Inertia and Ziggy working with Laravel while running on a local Valet installation. This is super-duper opinionated, but could be customized to include other stuff.
+Vitamin will install all the bits and pieces needed (plus a few others, because I use them regularly) to get Vite, Tailwind, Vue 3, Inertia and Ziggy working with Laravel while running on a local Valet installation. This is super-duper opinionated, but could be customized to include other stuff.
 
 I've also included some packages that I use often, but they can be removed if you don't need them.
 
@@ -21,8 +21,21 @@ Once installed, run the Vitamin Artisan command:
 ```
 php ./artisan vitamin:init
 ```
-
 Vitamin will guide you through a few prompts and then install the entire boilerplate including required NPM and Composer packages. You can modify these as you need later, but you should let the process complete.
+
+Link a Valet host if you haven't already:
+
+```
+valet link mysite
+```
+
+Open your browser:
+
+```
+http://mysite.test
+```
+
+If you see a "Welcome" message, you're good to go.
 
 ### What gets installed:
 
