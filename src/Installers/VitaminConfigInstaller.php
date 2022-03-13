@@ -27,7 +27,7 @@ class   VitaminConfigInstaller extends AbstractInstaller
 
     protected function updateEnv(): void
     {
-        $url = 'http://'.Arr::get($this->settings, 'variables.$HOST$');
+        $url = 'http://'.Arr::get($this->variables, '$HOST$');
 
         $env = preg_replace(
             '/^APP_URL\=(?:.+)$/m',

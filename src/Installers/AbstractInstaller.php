@@ -12,7 +12,7 @@ use Symfony\Component\Process\Process;
 
 abstract class AbstractInstaller implements InstallerContract
 {
-    protected array $settings = [];
+    protected array $variables = [];
 
     public function __construct(protected InputInterface $input, protected OutputInterface $output)
     {
@@ -36,7 +36,7 @@ abstract class AbstractInstaller implements InstallerContract
 
             $data = file_get_contents($source);
 
-            foreach ($this->variables() as $var => $value) {
+            foreach ($this->variables as $var => $value) {
                 $data = str_replace($var, (string)$value, $data);
             }
 
@@ -49,11 +49,6 @@ abstract class AbstractInstaller implements InstallerContract
     protected function stubPath(string $filename): string
     {
         return __DIR__.'/../../stubs/'.$filename;
-    }
-
-    protected function variables(): array
-    {
-        return Arr::get($this->settings, 'variables', []);
     }
 
     protected function removeFiles(): void
@@ -112,7 +107,7 @@ abstract class AbstractInstaller implements InstallerContract
 
     protected function makeDirectory(string $path): void
     {
-        if (! mkdir($path) && ! is_dir($path)) {
+        if (! mkdir($path, recursive: true) && ! is_dir($path)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
         }
     }
@@ -129,9 +124,9 @@ abstract class AbstractInstaller implements InstallerContract
         $this->output->writeln('[<info>✔</info>]');
     }
 
-    public function run(array $settings = []): void
+    public function run(array $variables = []): void
     {
-        $this->settings = $settings;
+        $this->variables = $variables;
         $this->handle();
     }
 

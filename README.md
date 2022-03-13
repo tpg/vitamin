@@ -44,7 +44,6 @@ The following Composer packages are installed:
 - [inertiajs/inertia-laravel](https://github.com/inertiajs/inertia-laravel)
 - [laravel/horizon](https://github.com/laravel/horizon)
 - [laravel/telescope](https://github.com/laravel/telescope)
-- [thepublicgood/deadbolt](https://github.com/tpg/deadbolt)
 - [thepublicgood/is-presentable](https://github.com/tpg/is-presentable)
 - [tightenco/ziggy](https://github.com/tighten/ziggy)
 - [laravel/envoy](https://github.com/laravel/envoy) (dev)
@@ -56,6 +55,7 @@ The following NPM packages are installed:
 - [@inertiajs/inertia](https://github.com/inertiajs/inertia)
 - [@inertiajs/inertia-vue3](https://github.com/inertiajs/inertia)
 - [@inertiajs/progress](https://github.com/inertiajs/progress)
+- [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography)
 - [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
 - [@vue/compiler-sfc](https://github.com/vuejs/core/tree/main/packages/compiler-sfc)
 - [autoprefixer](https://github.com/postcss/autoprefixer)
@@ -131,7 +131,7 @@ You'll need to make sure your app binds your new composer instead of the default
 ]
 ```
 
-That's it. Now your app will use your new composer instead of the default Vitamin one. If you need to override the `compose` method in your view composer, remember to call `parent::compose()`:
+That's it. Now your app will use your new view composer instead of the default Vitamin one. If you need to override the `compose` method in your view composer, remember to call `parent::compose()`:
 
 ```php
 public function compose(View $view): void
@@ -151,13 +151,17 @@ During development, all assets are served from the dev server running at port 30
 Inertia is my go to these days, so Vitamin will set it up by default. During initialisation, you're asked where your Vue components are stored. You can customize this location in `app.js` if you wish. Vite will load your Vue pages from there. The Inertia documentation uses `resources/js/Pages`, so Vitamin will make that suggestion. However, technically, you can put them anywhere. The only requirement is that the location must be child of the JS path.
 
 ### Ziggy
-Ziggy is a JavaScript route helper for Laravel. If allows you to use your Laravel defined routes from within your JavaScript front-end. It ships with a fairly decent Vue plugin, so it's included by default. Inside your Vue components, you'll have access to `route` function which you can pass any Laravel defined route name. Something like:
+Ziggy is a JavaScript route helper for Laravel. If allows you to use your Laravel defined routes from within your JavaScript front-end. Vitamin comes with a `Router` script that provides a `route` function. You can import this into any Vue file to get access to your Laravel routes:
 
 ```javascript
-this.route('home');
+import {route} from '@/Scripts/Routing/Router.js'
+
+route('home');
 ```
 
-Vitamin sets up Ziggy routes in the `resources/js/routes.js` file. This file needs to be regenerated each time your change your Laravel routes. Vitamin does this automatically by creating a simple Vite plugin that will run the `yarn routes` script each time a Laravel routes file changes. However, if you ever need to rebuild the routes, simply run `yarn routes` yourself.
+Vitamin sets up Ziggy routes in the `resources/js/Scripts/Routing/Ziggy.js` file. This file needs to be regenerated each time your change your Laravel routes. Vitamin does this automatically by creating a simple Vite plugin that will run the `yarn routes` script each time a Laravel routes file changes. However, if you ever need to rebuild the routes, simply run `yarn routes` yourself. If you. change the name of this file or want to place it somewhere else, remember to update the reference in the `Router.js` file as well.
+
+In previous versions of Vitamin, the Ziggy Vue plugin was used, but since I don't use that anymore and now have
 
 ## TLS Certificates
 It's possible to get all of this to work with TLS as well so you can use an  `https` address during development. First, you need to get Valet to secure your site. Valet provides a simple solution for this. If you're serving your site at `mysite.test` then you can get Valet to generate a new certificate:

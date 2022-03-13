@@ -8,13 +8,28 @@ use Symfony\Component\Process\Process;
 
 class NodeDependencyInstaller extends AbstractInstaller
 {
+    protected array $dependencies = [
+        '@heroicons/vue',
+        '@inertiajs/inertia',
+        '@inertiajs/inertia-vue3',
+        '@inertiajs/progress',
+        '@tailwindcss/typography',
+        '@vitejs/plugin-vue',
+        '@vue/compiler-sfc',
+        'autoprefixer@latest',
+        'axios',
+        'lodash',
+        'postcss@latest',
+        'tailwindcss@latest',
+        'vite',
+        'vue@next',
+    ];
+
     public function handle(): void
     {
         $this->start('Installing node dependencies');
 
-        $dependencies = $this->settings['node'] ?? [];
-
-        $process = $this->getProcessRunner($dependencies);
+        $process = $this->getProcessRunner($this->dependencies);
 
         $process->run(function (string $type, string $buffer) {
             $this->output->write('.');

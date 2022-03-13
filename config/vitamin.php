@@ -16,7 +16,7 @@ return [
     'port' => 3000,
 
     /*
-     * The view composer class to use
+     * The view composer class to use.
      */
     'composer' => \TPG\Vitamin\Composers\AppComposer::class,
 
@@ -26,11 +26,11 @@ return [
     'installers' => [
         VitaminConfigInstaller::class,
         ConfigInstaller::class,
+        ComposerDependencyInstaller::class,
         NodeScriptInstaller::class,
         NodeDependencyInstaller::class,
         JavaScriptInstaller::class,
         TailwindInstaller::class,
-        ComposerDependencyInstaller::class,
         InertiaInstaller::class,
-    ]
+    ],
 ];
