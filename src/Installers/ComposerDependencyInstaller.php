@@ -9,25 +9,32 @@ use Symfony\Component\Process\Process;
 
 class ComposerDependencyInstaller extends AbstractInstaller
 {
+    protected array $require = [
+        'inertiajs/inertia-laravel',
+        'laravel/horizon',
+        'laravel/telescope',
+        'thepublicgood/is-presentable',
+        'tightenco/ziggy',
+    ];
+
+    protected array $dev = [
+        'laravel/envoy',
+        'roave/security-advisories',
+    ];
+
     public function handle(): void
     {
-        $this->dependencies();
-        $this->dependencies(true);
-
         $this->start('Installing composer dev dependencies');
 
-        $this->getProcessInstance(Arr::get($this->settings, 'composer.dev'), true)->run(function (string $type, string $buffer) {
-            $this->output->write('.');
-        });
-
-        $this->done();
+        $this->dependencies();
+        $this->dependencies(dev: true);
     }
 
     protected function dependencies(bool $dev = false): void
     {
         $this->start('Installing '. ($dev ? 'dev ' : null) .'composer dependencies');
 
-        $dependencies = Arr::get($this->settings, $dev ? 'composer.dev' : 'composer.require');
+        $dependencies = $dev ? $this->dev : $this->require;
 
         $this->getProcessInstance($dependencies, $dev)->run(function (string $type, string $buffer) {
             $this->output->write('.');

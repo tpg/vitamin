@@ -42,42 +42,11 @@ class InitCommand extends Command
         $js = $this->getJsPath();
         $pages = $this->getPagesPath($js);
 
-        $settings = [
-            'variables' => [
-                '$HOST$' => $host,
-                '$PORT$' => $port,
-                '$JSPATH$' => $js,
-                '$PAGESPATH$' => $pages,
-            ],
-            'node' => [
-                '@heroicons/vue',
-                '@inertiajs/inertia',
-                '@inertiajs/inertia-vue3',
-                '@inertiajs/progress',
-                '@vitejs/plugin-vue',
-                '@vue/compiler-sfc',
-                'autoprefixer@latest',
-                'axios',
-                'lodash',
-                'postcss@latest',
-                'tailwindcss@latest',
-                'vite',
-                'vue@next',
-            ],
-            'composer' => [
-                'require' => [
-                    'inertiajs/inertia-laravel',
-                    'laravel/horizon',
-                    'laravel/telescope',
-                    'thepublicgood/deadbolt',
-                    'thepublicgood/is-presentable',
-                    'tightenco/ziggy',
-                ],
-                'dev' => [
-                    'laravel/envoy',
-                    'roave/security-advisories',
-                ],
-            ]
+        $variables = [
+            '$HOST$' => $host,
+            '$PORT$' => $port,
+            '$JSPATH$' => $js,
+            '$PAGESPATH$' => $pages,
         ];
 
         if ($vitamin->getInstallers()->count() === 0) {
@@ -85,7 +54,7 @@ class InitCommand extends Command
         }
 
         collect($vitamin->getInstallers())
-            ->each(fn (AbstractInstaller $installer) => $installer->run($settings));
+            ->each(fn (AbstractInstaller $installer) => $installer->run($variables));
 
         return 0;
     }

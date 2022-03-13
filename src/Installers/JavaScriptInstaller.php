@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace TPG\Vitamin\Installers;
 
 use Illuminate\Support\Arr;
+use Symfony\Component\Process\Process;
 
 class JavaScriptInstaller extends AbstractInstaller
 {
     protected function filesToCopy(): array
     {
-        $jsPath = Arr::get($this->settings, 'variables.$JSPATH$');
+        $jsPath = Arr::get($this->variables, '$JSPATH$');
 
         return [
             $this->stubPath('bootstrap.js') => resource_path($jsPath.'/bootstrap.js'),
-            $this->stubPath('router.js') => resource_path($jsPath.'/router.js'),
+            $this->stubPath('Router.js') => resource_path($jsPath.'/Scripts/Routing/Router.js'),
             $this->stubPath('app.js') => resource_path($jsPath.'/app.js'),
         ];
     }
@@ -29,6 +30,8 @@ class JavaScriptInstaller extends AbstractInstaller
     public function handle(): void
     {
         $this->start('Installing JS files');
+
+        Process::fromShellCommandline('yarn routes');
 
         $this->done();
     }

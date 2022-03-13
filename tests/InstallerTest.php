@@ -22,12 +22,10 @@ class InstallerTest extends TestCase
         $this->createTestStub('source2');
 
         $installer->run([
-            'variables' => [
-                '$HOST$' => 'hostname',
-                '$PORT$' => 3000,
-                '$JSPATH$' => 'jspath',
-                '$PAGESPATH$' => 'pages',
-            ]
+            '$HOST$' => 'hostname',
+            '$PORT$' => 3000,
+            '$JSPATH$' => 'jspath',
+            '$PAGESPATH$' => 'pages',
         ]);
 
         self::assertFileExists(__DIR__.'/target1');

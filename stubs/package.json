@@ -3,7 +3,7 @@
         "dev": "php ./artisan vitamin:serve",
         "production": "vite build",
         "prod": "yarn production",
-        "routes": "php ./artisan ziggy:generate resources/js/routes.js",
+        "routes": "php ./artisan ziggy:generate resources/$JSPATH$/Scripts/Routing/Ziggy.js",
         "horizon": "php ./artisan horizon"
     },
     "dependencies": {
