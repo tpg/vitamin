@@ -29,6 +29,12 @@ import {route} from '@/Scripts/Routing/Router.js';
                 This view is located at:
             </p>
             <pre>resources/$JSPATH$/Pages/Welcome.vue</pre>
+            <p>
+                Change it, rename it, delete it...
+            </p>
+            <hr class="my-5" />
+            If you like/use it, a star would be appreciated.<br />
+            <a href="https://github.com/tpg/vitamin" target="_blank">Vitamin on GitHub</a>
         </div>
     </div>
 </template>

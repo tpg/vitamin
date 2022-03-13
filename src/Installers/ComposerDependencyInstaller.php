@@ -24,8 +24,6 @@ class ComposerDependencyInstaller extends AbstractInstaller
 
     public function handle(): void
     {
-        $this->start('Installing composer dev dependencies');
-
         $this->dependencies();
         $this->dependencies(dev: true);
     }
