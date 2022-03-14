@@ -23,7 +23,7 @@ class ViteServeCommand extends Command
             '--host' => $this->host(),
             '--port' => $this->option('port') ?? config('vitamin.port'),
             '--strictPort' => true,
-            '--https' => $this->option('https') ?? false,
+            '--https' => $this->option('https') ?? config('vitamin.https'),
         ];
 
         $execParams = collect($params)->map(function ($value, $key) {

@@ -16,6 +16,11 @@ return [
     'port' => 3000,
 
     /*
+     * Use HTTPS when running the dev server. See README.md for setup instructions.
+     */
+    'https' => false,
+
+    /*
      * The view composer class to use.
      */
     'composer' => \TPG\Vitamin\Composers\AppComposer::class,
