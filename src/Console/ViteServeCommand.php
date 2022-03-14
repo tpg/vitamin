@@ -12,7 +12,7 @@ use TPG\Vitamin\Contracts\VitaminInterface;
 
 class ViteServeCommand extends Command
 {
-    protected $signature = 'vitamin:serve {--port=} {--host=}';
+    protected $signature = 'vitamin:serve {--port=} {--host=} {--https}';
 
     protected $description = 'Start the Vite development server';
 
@@ -23,6 +23,7 @@ class ViteServeCommand extends Command
             '--host' => $this->host(),
             '--port' => $this->option('port') ?? config('vitamin.port'),
             '--strictPort' => true,
+            '--https' => $this->option('https') ?? false,
         ];
 
         $execParams = collect($params)->map(function ($value, $key) {
