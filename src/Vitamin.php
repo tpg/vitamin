@@ -23,10 +23,10 @@ class Vitamin implements VitaminInterface
         $this->installers = collect();
     }
 
-    public function initializeInstallers(InputInterface $input, OutputInterface $output): void
+    public function initializeInstallers(InputInterface $input, OutputInterface $output, string $nodeManager): void
     {
         $this->installers = collect(config('vitamin.installers'))
-            ->map(fn(string $installerClass) => new $installerClass($input, $output));
+            ->map(fn(string $installerClass) => new $installerClass($input, $output, $nodeManager));
     }
 
     public function setInstallers(Collection $installers): void

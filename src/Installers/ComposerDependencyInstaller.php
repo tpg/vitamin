@@ -34,19 +34,18 @@ class ComposerDependencyInstaller extends AbstractInstaller
 
         $dependencies = $dev ? $this->dev : $this->require;
 
-        $this->getProcessInstance($dependencies, $dev)->run(function (string $type, string $buffer) {
-            $this->output->write('.');
-        });
+        $this->getProcessInstance($dependencies, $dev);
 
         $this->done();
     }
 
-    protected function getProcessInstance(array $packages, bool $dev = false): Process
+    protected function getProcessInstance(array $packages, bool $dev = false): void
     {
         $command = 'composer require';
         if ($dev) {
-            $command .= '--dev';
+            $command .= ' --dev';
         }
-        return Process::fromShellCommandline($command.' '.implode(' ', $packages), timeout: 0);
+
+        $this->runShellCommand($command. ' '.implode(' ', $packages));
     }
 }

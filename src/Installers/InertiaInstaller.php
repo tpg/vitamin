@@ -49,7 +49,8 @@ class InertiaInstaller extends AbstractInstaller
 
     protected function buildRoutes(): void
     {
-        $this->runShellCommand('yarn routes');
+        $exec = $this->nodeManager('run');
+        $this->runShellCommand($exec.' routes');
     }
 
     public function createPaths(array $settings): void

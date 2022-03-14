@@ -13,8 +13,13 @@ use Symfony\Component\Process\Process;
 abstract class AbstractInstaller implements InstallerContract
 {
     protected array $variables = [];
+    protected int $verbosity;
 
-    public function __construct(protected InputInterface $input, protected OutputInterface $output)
+    public function __construct(
+        protected InputInterface $input,
+        protected OutputInterface $output,
+        protected string $dependencyManager = 'yarn'
+    )
     {
     }
 
@@ -72,8 +77,10 @@ abstract class AbstractInstaller implements InstallerContract
     {
         $process = Process::fromShellCommandline($command);
         $process->mustRun(function ($type, $buffer) {
+
             $this->output->write('.');
-            if ($type === Process::ERR) {
+
+            if ($type === Process::ERR || $this->verbosity > OutputInterface::VERBOSITY_VERBOSE) {
                 $this->output->writeln('');
                 $this->output->writeln('<info>'.$buffer.'</info>');
             }
@@ -124,10 +131,27 @@ abstract class AbstractInstaller implements InstallerContract
         $this->output->writeln('[<info>✔</info>]');
     }
 
-    public function run(array $variables = []): void
+    public function run(array $variables = [], int $verbosity = OutputInterface::VERBOSITY_NORMAL): void
     {
         $this->variables = $variables;
+        $this->verbosity = $verbosity;
         $this->handle();
+    }
+
+    protected function nodeManager(string $command = null): string
+    {
+        $commands = [
+            'add' => [
+                'yarn' => 'add',
+                'npm' => 'install',
+            ],
+            'run' => [
+                'yarn' => '',
+                'npm' => 'run',
+            ]
+        ];
+
+        return $this->dependencyManager.' '.$commands[$command][$this->dependencyManager];
     }
 
     abstract public function handle(): void;

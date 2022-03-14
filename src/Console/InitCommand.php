@@ -41,6 +41,7 @@ class InitCommand extends Command
         $port = config('vitamin.port');
         $js = $this->getJsPath();
         $pages = $this->getPagesPath($js);
+        $manager = $this->getNodeDependencyManager();
 
         $variables = [
             '$HOST$' => $host,
@@ -50,11 +51,11 @@ class InitCommand extends Command
         ];
 
         if ($vitamin->getInstallers()->count() === 0) {
-            $vitamin->initializeInstallers($this->input, $this->output);
+            $vitamin->initializeInstallers($this->input, $this->output, $manager);
         }
 
         collect($vitamin->getInstallers())
-            ->each(fn (AbstractInstaller $installer) => $installer->run($variables));
+            ->each(fn (AbstractInstaller $installer) => $installer->run($variables, $this->verbosity));
 
         return 0;
     }
@@ -76,6 +77,11 @@ class InitCommand extends Command
         return $this->stripSlashes(
             $this->ask('Where are your Inertia Vue pages stored? (relative to resources directory)', $jsPath.'/Pages')
         );
+    }
+
+    protected function getNodeDependencyManager(): string
+    {
+        return $this->choice('Which Node dependency manager do you use?', ['npm', 'yarn'], 'yarn');
     }
 
     protected function stripSlashes(string $path): string
