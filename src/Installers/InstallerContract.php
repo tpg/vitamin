@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 interface InstallerContract
 {
-    public function __construct(InputInterface $input, OutputInterface $output);
+    public function __construct(InputInterface $input, OutputInterface $output, string $nodeManager = 'yarn');
 
     public function handle(): void;
 }

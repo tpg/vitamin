@@ -27,19 +27,16 @@ class NodeDependencyInstaller extends AbstractInstaller
 
     public function handle(): void
     {
-        $this->start('Installing node dependencies');
+        $this->start('Installing node dependencies using '.$this->dependencyManager);
 
-        $process = $this->getProcessRunner($this->dependencies);
-
-        $process->run(function (string $type, string $buffer) {
-            $this->output->write('.');
-        });
+        $this->runShellCommand($this->getCommand());
 
         $this->done();
     }
 
-    protected function getProcessRunner(array $dependencies = []): Process
+    protected function getCommand(): string
     {
-        return Process::fromShellCommandline('yarn add '.implode(' ', $dependencies).' -D', timeout: 0);
+        $exec = $this->nodeManager('add');
+        return $exec.' '.implode(' ', $this->dependencies);
     }
 }

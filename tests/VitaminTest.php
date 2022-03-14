@@ -63,7 +63,7 @@ class VitaminTest extends TestCase
         $vitamin = new Vitamin();
 
         $this->assertCount(0, $vitamin->getInstallers());
-        $vitamin->initializeInstallers(new ArrayInput([]), new ConsoleOutput());
+        $vitamin->initializeInstallers(new ArrayInput([]), new ConsoleOutput(), 'yarn');
 
         $this->assertCount(count(config('vitamin.installers')), $vitamin->getInstallers());
     }

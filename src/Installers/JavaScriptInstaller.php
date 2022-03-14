@@ -31,8 +31,6 @@ class JavaScriptInstaller extends AbstractInstaller
     {
         $this->start('Installing JS files');
 
-        Process::fromShellCommandline('yarn routes');
-
         $this->done();
     }
 }
