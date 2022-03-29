@@ -27,12 +27,14 @@ class ViteServeCommand extends Command
         ];
 
         $execParams = collect($params)->map(function ($value, $key) {
-            if (is_bool($value) && $value) {
-                return $key;
+
+            if (is_bool($value)) {
+                return $value ? $key : null;
             }
 
             return $key.'='.$value;
-        });
+
+        })->whereNotNull();
 
         $command = $exec.' '.$execParams->implode(' ');
 
