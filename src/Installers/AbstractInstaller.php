@@ -75,7 +75,7 @@ abstract class AbstractInstaller implements InstallerContract
 
     protected function runShellCommand(string $command): void
     {
-        $process = Process::fromShellCommandline($command);
+        $process = Process::fromShellCommandline($command, timeout: null);
         $process->mustRun(function ($type, $buffer) {
 
             $this->output->write('.');
