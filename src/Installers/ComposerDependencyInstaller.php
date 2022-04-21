@@ -11,15 +11,10 @@ class ComposerDependencyInstaller extends AbstractInstaller
 {
     protected array $require = [
         'inertiajs/inertia-laravel',
-        'laravel/horizon',
-        'laravel/telescope',
-        'thepublicgood/is-presentable',
         'tightenco/ziggy',
     ];
 
     protected array $dev = [
-        'laravel/envoy',
-        'roave/security-advisories',
     ];
 
     public function handle(): void
