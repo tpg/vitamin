@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] 2022-04-21
+### Fixed
+- Fixed a small bug when installing composer dependencies that outputed text even when the verbosity was low.
+- Made an update to the README file to state that the dev server needs to be started before browsing to the site after a fresh install.
+
+## [0.6.2] 2022-03-29
+### Fixed
+- The vitamin:serve Artisan command was including the --https flag even if the https config option was set to false.
+
+## [0.6.1] 2022-03-14
+### Added
+- Added https options to the vitamin.php config file
+- Added an --https flag to the vitamin:serve Artisan command.
+
+## [0.6.0] 2022-03-13
+### Added
+- Replaced router.js with Scripts/Routing/Router.js.
+- The @tailwindcss/typography dependency has been added.
+
+### Changed
+- Updated Welcome.vue.
+- Cleaned up the InitCommand and moved a few things around.
+- No longer using the Ziggy Vue plugin. Import {route} from the Router.js file instead.
+
+### Removed
+- Removed the thepublicgood/deadbolt dependency, as it has a fairly specific use case.
+
+## [0.5.1] 2022-02-25
+### Fixed
+- Fixes an issue where the package.json file is overwritten AFTER node dependencies are installed.
+
+## [0.5.0] 2022-02-19
+### Added
+- Will now update the APP_URL setting in your .env file.
+- Places a new Welcome.vue file in js/Pages.
+- Replaced the default web.php routes file with a slightly modified version to return an Intertia instance.
+
+### Fixed
+- Fixed a bug parsing the integer port number.
+- Fixed an odd bug in the dev server running test that.
+- Fixed a bug in the dev server command that was getting the wrong host.
+
 ## [0.4.0] 2022-01-31
 ### Added
 - Added support for a custom port number to be set.
