@@ -80,7 +80,7 @@ abstract class AbstractInstaller implements InstallerContract
 
             $this->output->write('.');
 
-            if ($type === Process::ERR || $this->verbosity > OutputInterface::VERBOSITY_VERBOSE) {
+            if ($this->verbosity > OutputInterface::VERBOSITY_VERBOSE) {
                 $this->output->writeln('');
                 $this->output->writeln('<info>'.$buffer.'</info>');
             }
