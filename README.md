@@ -20,7 +20,7 @@ composer require thepublicgood/vitamin
 
 Once installed, run the Vitamin Artisan command:
 
-```
+```shell
 php ./artisan vitamin:init
 ```
 
@@ -28,8 +28,14 @@ Vitamin will guide you through a few prompts and then install the entire boilerp
 
 Link a Valet host if you haven't already:
 
-```
+```shell
 valet link mysite
+```
+
+Run the Vite dev server:
+
+```shell
+yarn dev
 ```
 
 Open your browser:
