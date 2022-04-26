@@ -33,7 +33,7 @@ valet link mysite
 Run the Vite dev server:
 
 ```shell
-yarn dev
+php ./artisan vitamin:serve
 ```
 
 Open your browser:
