@@ -6,9 +6,7 @@ A highly opinionated packaged boilerplate solution for installing Vite, Tailwind
 
 ## What
 
-Vitamin will install all the bits and pieces needed (plus a few others, because I use them regularly) to get Vite, Tailwind, Vue 3, Inertia and Ziggy working with Laravel while running on a local Valet installation. This is super-duper opinionated, but could be customized to include other stuff.
-
-I've also included some packages that I use often, but they can be removed if you don't need them.
+Vitamin will install all the bits and pieces needed to get Vite, Tailwind, Vue 3, Inertia and Ziggy working with Laravel while running on a local Valet installation. This is super-duper opinionated, but could be customized to include other stuff.
 
 ## Installation
 
