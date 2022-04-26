@@ -51,12 +51,7 @@ If you see a "Welcome" message, you're good to go.
 The following Composer packages are installed:
 
 - [inertiajs/inertia-laravel](https://github.com/inertiajs/inertia-laravel)
-- [laravel/horizon](https://github.com/laravel/horizon)
-- [laravel/telescope](https://github.com/laravel/telescope)
-- [thepublicgood/is-presentable](https://github.com/tpg/is-presentable)
 - [tightenco/ziggy](https://github.com/tighten/ziggy)
-- [laravel/envoy](https://github.com/laravel/envoy) (dev)
-- [roave/security-advisories](https://github.com/Roave/SecurityAdvisories) (dev)
 
 The following NPM packages are installed:
 
