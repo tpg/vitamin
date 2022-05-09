@@ -142,8 +142,8 @@ abstract class AbstractInstaller implements InstallerContract
     {
         $commands = [
             'add' => [
-                'yarn' => 'add',
-                'npm' => 'install',
+                'yarn' => 'add -D',
+                'npm' => 'install --save-dev',
             ],
             'run' => [
                 'yarn' => '',
