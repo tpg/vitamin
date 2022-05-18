@@ -33,9 +33,6 @@
             "providers": [
                 "TPG\\Vitamin\\ServiceProvider"
             ]
-        },
-        "branch-aliases": {
-            "dev-develop": "1.0.x-dev"
         }
     }
 }
