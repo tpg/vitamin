@@ -21,7 +21,8 @@ class InertiaInstaller extends AbstractInstaller
     {
         return [
             $this->stubPath('app.blade.php') => resource_path('views/app.blade.php'),
-            $this->stubPath('Welcome.vue') => resource_path(Arr::get($this->variables, '$PAGESPATH$').'/Welcome.vue'),
+            $this->stubPath($this->option('ts') ? 'Welcome.vue.ts' : 'Welcome.vue') =>
+                resource_path(Arr::get($this->variables, '$PAGESPATH$').'/Welcome.vue'),
             $this->stubPath('web.routes.php') => base_path('routes/web.php'),
         ];
     }

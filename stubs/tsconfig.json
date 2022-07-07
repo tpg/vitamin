@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "types": ["vite/client"],
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "strict": true,
+        "skipLibCheck": true,
+        "noImplicitAny": false,
+        "isolatedModules": true,
+        "paths": {
+            "@/*": ["./resources/$JSPATH$/*"]
+        }
+    },
+    "include": ["resources/$JSPATH$/**/*"]
+}

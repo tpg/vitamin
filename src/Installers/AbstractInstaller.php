@@ -14,6 +14,7 @@ abstract class AbstractInstaller implements InstallerContract
 {
     protected array $variables = [];
     protected int $verbosity;
+    protected array $options = [];
 
     public function __construct(
         protected InputInterface $input,
@@ -21,6 +22,11 @@ abstract class AbstractInstaller implements InstallerContract
         protected string $dependencyManager = 'yarn'
     )
     {
+    }
+
+    protected function option(string $key): mixed
+    {
+        return Arr::get($this->options, $key);
     }
 
     protected function filesToCopy(): array
@@ -131,10 +137,11 @@ abstract class AbstractInstaller implements InstallerContract
         $this->output->writeln('[<info>✔</info>]');
     }
 
-    public function run(array $variables = [], int $verbosity = OutputInterface::VERBOSITY_NORMAL): void
+    public function run(array $variables = [], int $verbosity = OutputInterface::VERBOSITY_NORMAL, array $options = []): void
     {
         $this->variables = $variables;
         $this->verbosity = $verbosity;
+        $this->options = $options;
         $this->handle();
     }
 

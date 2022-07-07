@@ -15,6 +15,7 @@ use TPG\Vitamin\Contracts\VitaminInterface;
 class Vitamin implements VitaminInterface
 {
     protected string $jsPath = 'resources/js/app.js';
+    public bool $ts = false;
 
     protected Collection $installers;
 
@@ -61,6 +62,11 @@ class Vitamin implements VitaminInterface
             <script type="module" src="/build/{$manifest[$js]['file']}"></script>
             <link rel="stylesheet" href="/build/{$manifest[$js]['css'][0]}" />
         HTML);
+    }
+
+    public function ts(bool $ts = false): void
+    {
+        $this->ts = $ts;
     }
 
     protected function devServerRunning(string $host, int $port, bool $tls = false): bool

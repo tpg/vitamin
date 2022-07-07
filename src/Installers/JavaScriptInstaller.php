@@ -13,23 +13,27 @@ class JavaScriptInstaller extends AbstractInstaller
     {
         $jsPath = Arr::get($this->variables, '$JSPATH$');
 
+        $ext = $this->option('ts') ? 'ts' : 'js';
+
         return [
-            $this->stubPath('bootstrap.js') => resource_path($jsPath.'/bootstrap.js'),
-            $this->stubPath('Router.js') => resource_path($jsPath.'/Scripts/Routing/Router.js'),
-            $this->stubPath('app.js') => resource_path($jsPath.'/app.js'),
+            $this->stubPath('bootstrap.'.$ext) => resource_path($jsPath.'/bootstrap.'.$ext),
+            $this->stubPath('Router.'.$ext) => resource_path($jsPath.'/Scripts/Routing/Router.'.$ext),
+            $this->stubPath('app.'.$ext) => resource_path($jsPath.'/app.'.$ext),
         ];
     }
 
     protected function filesToRemove(): array
     {
         return [
+            resource_path('js/app.js'),
+            resource_path('js/bootstrap.js'),
             base_path('webpack.mix.js'),
         ];
     }
 
     public function handle(): void
     {
-        $this->start('Installing JS files');
+        $this->start($this->option('ts') ? 'Installing TS files' : 'Installing JS files');
 
         $this->done();
     }

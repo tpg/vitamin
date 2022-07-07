@@ -12,11 +12,19 @@ class ConfigInstaller extends AbstractInstaller
 {
     protected function filesToCopy(): array
     {
-        return [
+        $ext = config('ts') ? 'ts' : 'js';
+
+        $files = [
             $this->stubPath('jsconfig.json') => base_path('jsconfig.json'),
-            $this->stubPath('vite.config.js') => base_path('vite.config.js'),
+            $this->stubPath('vite.config.'.$ext) => base_path('vite.config.'.$ext),
             $this->stubPath('LocalValetDriver.php') => base_path('LocalValetDriver.php'),
         ];
+
+        if ($this->option('ts')) {
+            $files[$this->stubPath('tsconfig.json')] = base_path('tsconfig.json');
+        }
+
+        return $files;
     }
 
     public function handle(): void

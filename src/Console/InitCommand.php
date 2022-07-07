@@ -8,31 +8,33 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use TPG\Vitamin\Contracts\VitaminInterface;
 use TPG\Vitamin\Installers\AbstractInstaller;
-use TPG\Vitamin\Installers\ComposerDependencyInstaller;
-use TPG\Vitamin\Installers\ConfigInstaller;
-use TPG\Vitamin\Installers\InertiaInstaller;
-use TPG\Vitamin\Installers\JavaScriptInstaller;
-use TPG\Vitamin\Installers\NodeDependencyInstaller;
-use TPG\Vitamin\Installers\NodeScriptInstaller;
-use TPG\Vitamin\Installers\TailwindInstaller;
-use TPG\Vitamin\Installers\ViewComposerInstaller;
-use TPG\Vitamin\Installers\VitaminConfigInstaller;
 
 class InitCommand extends Command
 {
-    protected $signature = 'vitamin:init';
+    protected $signature = 'vitamin:init {--ts} {--host=} {--manager=} {--y|force}';
 
     protected $description = 'Initialize a new Vitamin project';
 
     public function handle(VitaminInterface $vitamin): int
     {
-        $this->info('Running this command will overwrite some vital files that may cause an existing Laravel project to fail.');
-        if ($this->confirm('Are you sure you want to continue?', false)) {
+        $vitamin->ts($this->option('ts'));
+
+        if ($this->confirmed()) {
             return $this->install($vitamin);
         }
 
         $this->info('No changes have been made.');
         return 1;
+    }
+
+    protected function confirmed(): bool
+    {
+        if ($this->option('force')) {
+            return true;
+        }
+
+        $this->info('Running this command will overwrite some vital files that may cause an existing Laravel project to fail.');
+        return $this->confirm('Are you sure you want to continue?', false);
     }
 
     protected function install(VitaminInterface $vitamin): int
@@ -55,33 +57,41 @@ class InitCommand extends Command
         }
 
         collect($vitamin->getInstallers())
-            ->each(fn (AbstractInstaller $installer) => $installer->run($variables, $this->verbosity));
+            ->each(fn (AbstractInstaller $installer) => $installer->run($variables, $this->verbosity, ['ts' => $vitamin->ts]));
 
         return 0;
     }
 
     protected function getHost(): string
     {
-        return $this->ask('What hostname are you using in development? (e.g.: valet.test):');
+        return $this->option('host') ?? $this->ask('What hostname are you using in development? (e.g.: valet.test):');
     }
 
     protected function getJsPath(): string
     {
-        return $this->stripSlashes(
-            $this->ask('Where are your JS sources stored? (relative to resources directory)', 'js')
-        );
+        return 'js';
+//        return $this->stripSlashes(
+//            $this->ask('Where are your JS sources stored? (relative to resources directory)', 'js')
+//        );
     }
 
     protected function getPagesPath(string $jsPath): string
     {
-        return $this->stripSlashes(
-            $this->ask('Where are your Inertia Vue pages stored? (relative to resources directory)', $jsPath.'/Pages')
-        );
+        return  $this->getJsPath().'/Pages';
+//        return $this->stripSlashes(
+//            $this->ask('Where are your Inertia Vue pages stored? (relative to resources directory)', $jsPath.'/Pages')
+//        );
     }
 
     protected function getNodeDependencyManager(): string
     {
-        return $this->choice('Which Node dependency manager do you use?', ['npm', 'yarn'], 'yarn');
+        $manager = $this->option('manager');
+
+        return match($manager) {
+            'yarn' => 'yarn',
+            'npm' => 'npm',
+            default => $this->choice('Which Node dependency manager do you use?', ['npm', 'yarn'], 'yarn'),
+        };
     }
 
     protected function stripSlashes(string $path): string

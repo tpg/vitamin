@@ -21,6 +21,11 @@ return [
     'https' => false,
 
     /*
+     * TypeScript support
+     */
+    'ts' => false,
+
+    /*
      * The view composer class to use.
      */
     'composer' => \TPG\Vitamin\Composers\AppComposer::class,

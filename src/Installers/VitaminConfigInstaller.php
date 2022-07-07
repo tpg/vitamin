@@ -20,6 +20,11 @@ class   VitaminConfigInstaller extends AbstractInstaller
     {
         $this->start('Installing Vitamin configuration');
 
+        if ($this->option('ts')) {
+            $config = str_replace('\'ts\' => false', '\'ts\' => true', file_get_contents(config_path('vitamin.php')));
+            file_put_contents(config_path('vitamin.php'), $config);
+        }
+
         $this->updateEnv();
 
         $this->done();

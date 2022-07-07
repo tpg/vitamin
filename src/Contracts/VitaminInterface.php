@@ -15,4 +15,5 @@ interface VitaminInterface
     public function initializeInstallers(InputInterface $input, OutputInterface $output, string $nodeManager): void;
     public function setInstallers(Collection $installers): void;
     public function getInstallers(): Collection;
+    public function ts(bool $ts = false): void;
 }
