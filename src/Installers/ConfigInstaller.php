@@ -12,7 +12,7 @@ class ConfigInstaller extends AbstractInstaller
 {
     protected function filesToCopy(): array
     {
-        $ext = config('ts') ? 'ts' : 'js';
+        $ext = $this->option('ts') ? 'ts' : 'js';
 
         $files = [
             $this->stubPath('jsconfig.json') => base_path('jsconfig.json'),
@@ -26,6 +26,14 @@ class ConfigInstaller extends AbstractInstaller
 
         return $files;
     }
+
+    protected function filesToRemove(): array
+    {
+        return [
+            base_path('vite.config.js'),
+        ];
+    }
+
 
     public function handle(): void
     {
