@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {route} from '@/Scripts/Routing/Router';
 
 //...
@@ -13,7 +13,7 @@ import {route} from '@/Scripts/Routing/Router';
             <p>
                 To run your site in dev mode use:
             </p>
-            <pre>yarn dev</pre>
+            <pre>yarn dev</pre>\
             <hr class="my-5" />
             <p>
                 When you're ready to build for production:
