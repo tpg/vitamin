@@ -42,8 +42,6 @@ class InitCommandTest extends TestCase
         $this->artisan(InitCommand::class)
             ->expectsConfirmation('Are you sure you want to continue?', 'yes')
             ->expectsQuestion('What hostname are you using in development? (e.g.: valet.test):', 'vitamin.test')
-            ->expectsQuestion('Where are your JS sources stored? (relative to resources directory)', 'js')
-            ->expectsQuestion('Where are your Inertia Vue pages stored? (relative to resources directory)', 'js/Pages')
             ->expectsChoice('Which Node dependency manager do you use?', 'yarn', ['yarn', 'npm'])
             ->assertExitCode(0);
     }
