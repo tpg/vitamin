@@ -9,7 +9,7 @@ class NodeScriptInstaller extends AbstractInstaller
     protected function filesToCopy(): array
     {
         return [
-            $this->stubPath('package.json') => base_path('package.json'),
+            $this->stubPath('package.json.stub') => base_path('package.json'),
         ];
     }
 

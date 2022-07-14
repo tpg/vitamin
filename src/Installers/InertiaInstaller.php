@@ -20,9 +20,9 @@ class InertiaInstaller extends AbstractInstaller
     protected function filesToCopy(): array
     {
         return [
-            $this->stubPath('app.blade.php') => resource_path('views/app.blade.php'),
-            $this->stubPath('Welcome.vue') => resource_path(Arr::get($this->variables, '$PAGESPATH$').'/Welcome.vue'),
-            $this->stubPath('web.routes.php') => base_path('routes/web.php'),
+            $this->stubPath('app.blade.php.stub') => resource_path('views/app.blade.php'),
+            $this->stubPath('Welcome.vue.stub') => resource_path(Arr::get($this->variables, '$PAGESPATH$').'/Welcome.vue'),
+            $this->stubPath('web.routes.php.stub') => base_path('routes/web.php'),
         ];
     }
 

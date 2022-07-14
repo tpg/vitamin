@@ -14,9 +14,9 @@ class JavaScriptInstaller extends AbstractInstaller
         $jsPath = Arr::get($this->variables, '$JSPATH$');
 
         return [
-            $this->stubPath('bootstrap.js') => resource_path($jsPath.'/bootstrap.js'),
-            $this->stubPath('Router.js') => resource_path($jsPath.'/Scripts/Routing/Router.js'),
-            $this->stubPath('app.js') => resource_path($jsPath.'/app.js'),
+            $this->stubPath('bootstrap.js.stub') => resource_path($jsPath.'/bootstrap.js'),
+            $this->stubPath('Router.js.stub') => resource_path($jsPath.'/Scripts/Routing/Router.js'),
+            $this->stubPath('app.js.stub') => resource_path($jsPath.'/app.js'),
         ];
     }
 

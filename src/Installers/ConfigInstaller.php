@@ -13,9 +13,9 @@ class ConfigInstaller extends AbstractInstaller
     protected function filesToCopy(): array
     {
         return [
-            $this->stubPath('jsconfig.json') => base_path('jsconfig.json'),
-            $this->stubPath('vite.config.js') => base_path('vite.config.js'),
-            $this->stubPath('LocalValetDriver.php') => base_path('LocalValetDriver.php'),
+            $this->stubPath('jsconfig.json.stub') => base_path('jsconfig.json'),
+            $this->stubPath('vite.config.js.stub') => base_path('vite.config.js'),
+            $this->stubPath('LocalValetDriver.php.stub') => base_path('LocalValetDriver.php'),
         ];
     }
 
