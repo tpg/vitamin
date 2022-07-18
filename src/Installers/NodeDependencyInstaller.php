@@ -21,8 +21,8 @@ class NodeDependencyInstaller extends AbstractInstaller
         'lodash',
         'postcss@latest',
         'tailwindcss@latest',
-        'vite',
-        'vue@next',
+        'vite@^2.9.0',
+        'vue',
     ];
 
     public function handle(): void

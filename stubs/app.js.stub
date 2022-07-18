@@ -1,5 +1,5 @@
 import '../css/app.css';
-import './bootstrap.js.stub';
+import './bootstrap.js';
 
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
@@ -17,5 +17,5 @@ createInertiaApp({
         createApp({ render: () => h(app, props) })
             .use(plugin)
             .mount(el);
-    },
+    }
 });
