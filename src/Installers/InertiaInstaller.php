@@ -21,7 +21,7 @@ class InertiaInstaller extends AbstractInstaller
     {
         return [
             $this->stubPath('app.blade.php.stub') => resource_path('views/app.blade.php'),
-            $this->stubPath('Welcome.vue.stub') => resource_path(Arr::get($this->variables, '$PAGESPATH$').'/Welcome.vue'),
+            $this->stubPath('Welcome.vue.stub') => resource_path($this->fullPagesPath().'/Welcome.vue'),
             $this->stubPath('web.routes.php.stub') => base_path('routes/web.php'),
         ];
     }
@@ -32,7 +32,7 @@ class InertiaInstaller extends AbstractInstaller
 
         $this->installMiddleware();
         $this->buildRoutes();
-        $this->createPaths($this->variables);
+        $this->createPaths();
 
         $this->done();
     }
@@ -53,10 +53,10 @@ class InertiaInstaller extends AbstractInstaller
         $this->runShellCommand($exec.' routes');
     }
 
-    public function createPaths(array $settings): void
+    public function createPaths(): void
     {
         $paths = [
-            Arr::get($settings, '$PAGESPATH$'),
+            $this->fullPagesPath(),
         ];
 
         foreach ($paths as $path) {
@@ -67,5 +67,10 @@ class InertiaInstaller extends AbstractInstaller
 
             $this->output->write('.');
         }
+    }
+
+    protected function fullPagesPath(): string
+    {
+        return Arr::get($this->variables, '$JSPATH$').'/'.Arr::get($this->variables, '$PAGESPATH$');
     }
 }

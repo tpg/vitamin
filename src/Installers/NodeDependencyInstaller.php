@@ -9,20 +9,19 @@ use Symfony\Component\Process\Process;
 class NodeDependencyInstaller extends AbstractInstaller
 {
     protected array $dependencies = [
-        '@heroicons/vue',
-        '@inertiajs/inertia',
-        '@inertiajs/inertia-vue3',
-        '@inertiajs/progress',
-        '@tailwindcss/typography',
-        '@vitejs/plugin-vue',
-        '@vue/compiler-sfc',
+        '@inertiajs/inertia@latest',
+        '@inertiajs/inertia-vue3@latest',
+        '@inertiajs/progress@latest',
+        '@tailwindcss/typography@latest',
+        '@vitejs/plugin-vue@latest',
+        '@vue/compiler-sfc@latest',
         'autoprefixer@latest',
-        'axios',
-        'lodash',
+        'axios@latest',
+        'lodash@latest',
         'postcss@latest',
         'tailwindcss@latest',
-        'vite@^2.9.0',
-        'vue',
+        'vite@latest',
+        'vue@latest',
     ];
 
     public function handle(): void

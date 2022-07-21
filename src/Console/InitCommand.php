@@ -54,7 +54,7 @@ class InitCommand extends Command
             $vitamin->initializeInstallers($this->input, $this->output, $manager);
         }
 
-        collect($vitamin->getInstallers())
+        $vitamin->getInstallers()
             ->each(fn (AbstractInstaller $installer) => $installer->run($variables, $this->verbosity));
 
         return 0;
@@ -75,7 +75,7 @@ class InitCommand extends Command
     protected function getPagesPath(string $jsPath): string
     {
         return $this->stripSlashes(
-            $this->ask('Where are your Inertia Vue pages stored? (relative to resources directory)', $jsPath.'/Pages')
+            $this->ask('Where are your Inertia Vue pages stored? (relative to your JS sources directory)', 'Pages')
         );
     }
 
