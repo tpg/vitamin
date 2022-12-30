@@ -2,6 +2,9 @@
 
 # Vitamin
 
+> Laravel now has Vite support out of the box. Vitamin will no longer receive any new updates. You get the same
+> functionality with Laravel + Breeze.
+
 A highly opinionated packaged boilerplate solution for installing Vite, Tailwind and Inertia (along a few other things) into a Laravel app.
 
 ## What
